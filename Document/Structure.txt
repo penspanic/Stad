@@ -1,0 +1,32 @@
+Stad.Core
+    Stad 핵심 구현부. Stad 적용 프로젝트에서 참조하여, 요구사항 구현 필요
+    Annotation
+    Model
+    Source
+        Assembly
+            : 모델의 원천.
+        Data
+            : 데이터
+    
+
+Stad.Analysis
+    Assembly 분석하여 Stad Model 형태로 변환
+    데이터 간의 참조를 분석하는 기능
+    Assembly내 Stad Model간 참조 분석
+    
+
+Stad.Diff
+    Assembly, Data Diff 기능 제공
+    - 현재 변경된 사항(Local Changes)
+    - 두가지 소스의 Diff(1.2.0 ver assembly, 1.3.0 ver assembly 의 Diff)
+
+
+Stad.View
+    Stad 기능을 제어하는 interface 구현.
+    
+    
+-----------------------------------------------------
+
+사용 프로젝트 요구사항
+    Stad.Core 참조
+    Stad.Core.RegistryDefinition 구현

@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <AssemblyName>Stad.Core</AssemblyName>
+        <RootNamespace>Stad.Core</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Folder Include="Serialization" />
+      <Folder Include="Utility" />
+    </ItemGroup>
+
+</Project>
