@@ -7,8 +7,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Serialization" />
       <Folder Include="Utility" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Stad\Stad.csproj" />
     </ItemGroup>
 
 </Project>

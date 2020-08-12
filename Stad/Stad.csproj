@@ -1,12 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <OutputType>Exe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Stad\Stad.csproj" />
+      <PackageReference Include="MessagePack" Version="2.1.152" />
     </ItemGroup>
 
 </Project>

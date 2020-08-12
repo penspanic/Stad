@@ -1,4 +1,4 @@
-using Stad.Core.Annotation;
+using Stad.Annotation;
 
 namespace Stad.Core
 {

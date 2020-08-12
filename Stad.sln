@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Analysis", "Stad.Analy
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Sample", "Stad.Sample\Stad.Sample.csproj", "{31F8D02A-FACE-4F04-9521-E109AD59935D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad", "Stad\Stad.csproj", "{BCDDDDC0-C963-4FDC-8F4D-1D54B72FB5A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Test", "Stad.Test\Stad.Test.csproj", "{2B6B99E5-7048-4831-8FF5-C3037CE90E36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{31F8D02A-FACE-4F04-9521-E109AD59935D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31F8D02A-FACE-4F04-9521-E109AD59935D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31F8D02A-FACE-4F04-9521-E109AD59935D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCDDDDC0-C963-4FDC-8F4D-1D54B72FB5A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCDDDDC0-C963-4FDC-8F4D-1D54B72FB5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCDDDDC0-C963-4FDC-8F4D-1D54B72FB5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCDDDDC0-C963-4FDC-8F4D-1D54B72FB5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
