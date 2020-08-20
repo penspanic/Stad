@@ -21,7 +21,17 @@ namespace Stad.DataSet
         {
             var formatter = CreateFormatter(item);
             var content = ReadContent(item);
-            return Task.FromResult(formatter.Deserialize(type, content));
+            return Task.FromResult(CallGenericDeserialize(type, formatter, content));
+        }
+
+        private object CallGenericDeserialize(Type type, IStadFormatter formatter, ArraySegment<byte> content)
+        {
+            // TODO: 최적화
+            Func<ArraySegment<byte>, object> method = (Func<ArraySegment<byte>, object>) typeof(IStadFormatter)
+                .GetMethod("Deserialize").MakeGenericMethod(type)
+                .CreateDelegate(typeof(Func<ArraySegment<byte>, object>), formatter);
+
+            return method(content);
         }
 
         public Task<List<DataSetItem>> GetItems()
@@ -32,7 +42,7 @@ namespace Stad.DataSet
                 return null;
             }
 
-            var manifest = JsonSerializer.Deserialize<DataSetManifest>(File.ReadAllBytes(path));
+            var manifest = DataSetManifest.Deserialize(File.ReadAllText(path));
             return Task.FromResult(manifest.Items);
         }
 
@@ -50,9 +60,10 @@ namespace Stad.DataSet
             return null;
         }
 
-        private ReadOnlySpan<byte> ReadContent(DataSetItem item)
+        private ArraySegment<byte> ReadContent(DataSetItem item)
         {
-            return File.ReadAllBytes(_rootPath + item.Name);
+            // TODO: stackalloc된 array에 copy 하도록 하여 return?
+            return File.ReadAllBytes($"{_rootPath + item.Name}.{item.EncodingType}");
         }
     }
 }

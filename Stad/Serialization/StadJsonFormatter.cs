@@ -1,23 +1,29 @@
 using System;
+using System.Buffers;
 using System.IO;
-using System.Text.Json;
+using Utf8Json;
 
 namespace Stad.Serialization
 {
     public class StadJsonFormatter : IStadFormatter
     {
-        public void Serialize(Stream stream)
+        public void Serialize<T>(T target, Stream stream)
         {
+            JsonSerializer.Serialize(stream, target);
         }
 
-        public T Deserialize<T>(ReadOnlySpan<byte> input)
+        public T Deserialize<T>(ArraySegment<byte> input)
         {
-            return JsonSerializer.Deserialize<T>(input);
-        }
-
-        public object Deserialize(Type type, ReadOnlySpan<byte> input)
-        {
-            return JsonSerializer.Deserialize(input, type);
+            byte[] rent = ArrayPool<byte>.Shared.Rent(input.Count);
+            try
+            {
+                input.CopyTo(rent);
+                return JsonSerializer.Deserialize<T>(rent);
+            }
+            finally
+            {
+                ArrayPool<byte>.Shared.Return(rent);
+            }
         }
     }
 }

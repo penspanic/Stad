@@ -19,10 +19,11 @@ namespace Stad.Serialization
             }
 
             T result = new T();
+            // TODO: 병렬 처리?
             foreach (DataSetItem item in items)
             {
-                var memberInfo = ReflectionUtility.FindMember(result, item);
-                object value = dataSet.LoadAsync(memberInfo.DeclaringType, item);
+                (var memberInfo, var memberType) = ReflectionUtility.FindMember(result, item);
+                object value = await dataSet.LoadAsync(memberType, item);
                 ReflectionUtility.SetValue(result, item, value);
             }
 

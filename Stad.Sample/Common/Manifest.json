@@ -1,0 +1,14 @@
+{
+  "Items": [
+    {
+      "Name": "SampleSingleModel",
+      "SizeBytes": 111,
+      "EncodingType": "Json"
+    },
+    {
+      "Name": "SampleKeyValueModel",
+      "SizeBytes": 222,
+      "EncodingType": "Json"
+    }
+  ]
+}

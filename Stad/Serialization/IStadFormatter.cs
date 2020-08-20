@@ -5,8 +5,7 @@ namespace Stad.Serialization
 {
     public interface IStadFormatter
     {
-        public void Serialize(Stream stream);
-        public T Deserialize<T>(ReadOnlySpan<byte> input);
-        public object Deserialize(Type type, ReadOnlySpan<byte> input);
+        public void Serialize<T>(T target, Stream stream);
+        public T Deserialize<T>(ArraySegment<byte> input);
     }
 }

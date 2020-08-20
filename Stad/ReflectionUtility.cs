@@ -6,22 +6,22 @@ namespace Stad
 {
     public class ReflectionUtility
     {
-        public static MemberInfo FindMember(object target, DataSetItem item)
+        public static (MemberInfo, Type) FindMember(object target, DataSetItem item)
         {
             Type targetType = target.GetType();
             FieldInfo fieldInfo = targetType.GetField(item.Name);
             if (fieldInfo != null)
             {
-                return fieldInfo;
+                return (fieldInfo, fieldInfo.FieldType);
             }
 
             PropertyInfo propertyInfo = targetType.GetProperty(item.Name);
             if (propertyInfo != null)
             {
-                return propertyInfo;
+                return (propertyInfo, propertyInfo.PropertyType);
             }
 
-            return null;
+            return (null, null);
         }
 
         public static bool SetValue(object target, DataSetItem item, object value)
