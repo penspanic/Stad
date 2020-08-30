@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections.Immutable;
+using System.Collections.ObjectModel;
 using Stad.Core.Model;
 
 namespace Stad.Core
@@ -18,7 +20,17 @@ namespace Stad.Core
     /// </summary>
     public class StadRegistry
     {
-        public Dictionary<Path, ListModel> ListModels = new Dictionary<Path,ListModel>();
-        public Dictionary<Path, StadModel> SingleModels = new Dictionary<Path, StadModel>();
+        public static StadRegistry Create(ReadOnlyCollection<DataSetModel> dataSets)
+        {
+            StadRegistry stadRegistry = new StadRegistry(dataSets);
+            return stadRegistry;
+        }
+
+        private StadRegistry(ReadOnlyCollection<DataSetModel> dataSets)
+        {
+            DataSets = dataSets;
+        }
+
+        public ReadOnlyCollection<DataSetModel> DataSets { get; }
     }
 }

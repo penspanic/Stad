@@ -4,13 +4,17 @@ namespace Stad.Core.Model
 {
     public class StadModel : IStadModel
     {
-        public StadModel(AnnotationInfo annotationInfo, ReadOnlyCollection<MemberDefinition> members)
+        public StadModel(string type, AnnotationInfo annotationInfo, ReadOnlyCollection<MemberDefinition> members)
         {
+            Type = type;
+            TypeCode = Utility.ToTypeCode(type);
             AnnotationInfo = annotationInfo;
             Members = members;
         }
 
-        public readonly AnnotationInfo AnnotationInfo;
-        public readonly ReadOnlyCollection<MemberDefinition> Members;
+        public string Type { get; }
+        public int TypeCode { get; }
+        public AnnotationInfo AnnotationInfo { get; }
+        public ReadOnlyCollection<MemberDefinition> Members { get; }
     }
 }

@@ -56,54 +56,6 @@ namespace Stad.Analysis
             {
                 logger("failed to get metadata of System.Threading.Tasks.Task");
             }
-
-            MessagePackObjectAttribute = compilation.GetTypeByMetadataName("MessagePack.MessagePackObjectAttribute");
-            if (MessagePackObjectAttribute == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.MessagePackObjectAttribute");
-            }
-
-            UnionAttribute = compilation.GetTypeByMetadataName("MessagePack.UnionAttribute");
-            if (UnionAttribute == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.UnionAttribute");
-            }
-
-            SerializationConstructorAttribute = compilation.GetTypeByMetadataName("MessagePack.SerializationConstructorAttribute");
-            if (SerializationConstructorAttribute == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.SerializationConstructorAttribute");
-            }
-
-            KeyAttribute = compilation.GetTypeByMetadataName("MessagePack.KeyAttribute");
-            if (KeyAttribute == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.KeyAttribute");
-            }
-
-            IgnoreAttribute = compilation.GetTypeByMetadataName("MessagePack.IgnoreMemberAttribute");
-            if (IgnoreAttribute == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.IgnoreMemberAttribute");
-            }
-
-            IgnoreDataMemberAttribute = compilation.GetTypeByMetadataName("System.Runtime.Serialization.IgnoreDataMemberAttribute");
-            if (IgnoreDataMemberAttribute == null)
-            {
-                logger("failed to get metadata of System.Runtime.Serialization.IgnoreDataMemberAttribute");
-            }
-
-            IMessagePackSerializationCallbackReceiver = compilation.GetTypeByMetadataName("MessagePack.IMessagePackSerializationCallbackReceiver");
-            if (IMessagePackSerializationCallbackReceiver == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.IMessagePackSerializationCallbackReceiver");
-            }
-
-            MessagePackFormatterAttribute = compilation.GetTypeByMetadataName("MessagePack.MessagePackFormatterAttribute");
-            if (IMessagePackSerializationCallbackReceiver == null)
-            {
-                throw new InvalidOperationException("failed to get metadata of MessagePack.MessagePackFormatterAttribute");
-            }
         }
     }
 
@@ -301,11 +253,11 @@ namespace Stad.Analysis
 
                     return false;
                 })
-                .Where(x =>
-                       ((x.TypeKind == TypeKind.Interface) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.UnionAttribute)))
-                    || ((x.TypeKind == TypeKind.Class && x.IsAbstract) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.UnionAttribute)))
-                    || ((x.TypeKind == TypeKind.Class) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.MessagePackObjectAttribute)))
-                    || ((x.TypeKind == TypeKind.Struct) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.MessagePackObjectAttribute))))
+                .Where(x => true)
+                    //   ((x.TypeKind == TypeKind.Interface) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.UnionAttribute)))
+                    //|| ((x.TypeKind == TypeKind.Class && x.IsAbstract) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.UnionAttribute)))
+                    //|| ((x.TypeKind == TypeKind.Class) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.MessagePackObjectAttribute)))
+                    //|| ((x.TypeKind == TypeKind.Struct) && x.GetAttributes().Any(x2 => x2.AttributeClass.ApproximatelyEqual(typeReferences.MessagePackObjectAttribute))))
                 .ToArray();
         }
 
@@ -394,6 +346,7 @@ namespace Stad.Analysis
                 Namespace = type.ContainingNamespace.IsGlobalNamespace ? null : type.ContainingNamespace.ToDisplayString(),
                 FullName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                 UnderlyingType = type.EnumUnderlyingType.ToDisplayString(BinaryWriteFormat),
+                Attributes = type.GetAttributes()
             };
 
             this.collectedEnumInfo.Add(info);
@@ -442,23 +395,11 @@ namespace Stad.Analysis
         private ObjectSerializationInfo GetObjectInfo(INamedTypeSymbol type)
         {
             var isClass = !type.IsValueType;
-
-            AttributeData contractAttr = type.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.MessagePackObjectAttribute));
-            if (contractAttr == null)
-            {
-                throw new MessagePackGeneratorResolveFailedException("Serialization Object must mark MessagePackObjectAttribute." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
-            }
-
-            var isIntKey = true;
-            var intMembers = new Dictionary<int, MemberSerializationInfo>();
-            var stringMembers = new Dictionary<string, MemberSerializationInfo>();
-
-            if (this.isForceUseMap || (bool)contractAttr.ConstructorArguments[0].Value)
+            var members = new List<MemberSerializationInfo>();
+            if (this.isForceUseMap/* || (bool)contractAttr.ConstructorArguments[0].Value*/)
             {
                 // All public members are serialize target except [Ignore] member.
-                isIntKey = false;
 
-                var hiddenIntKey = 0;
 
                 foreach (IPropertySymbol item in RoslynExtensions.GetAllMembers(type).OfType<IPropertySymbol>().Where(x => !x.IsOverride))
                 {
@@ -473,7 +414,6 @@ namespace Stad.Analysis
                     {
                         IsReadable = (item.GetMethod != null) && item.GetMethod.DeclaredAccessibility == Accessibility.Public && !item.IsStatic,
                         IsWritable = (item.SetMethod != null) && item.SetMethod.DeclaredAccessibility == Accessibility.Public && !item.IsStatic,
-                        StringKey = item.Name,
                         IsProperty = true,
                         IsField = false,
                         Name = item.Name,
@@ -486,8 +426,7 @@ namespace Stad.Analysis
                         continue;
                     }
 
-                    member.IntKey = hiddenIntKey++;
-                    stringMembers.Add(member.StringKey, member);
+                    members.Add(member);
 
                     this.CollectCore(item.Type); // recursive collect
                 }
@@ -510,7 +449,6 @@ namespace Stad.Analysis
                     {
                         IsReadable = item.DeclaredAccessibility == Accessibility.Public && !item.IsStatic,
                         IsWritable = item.DeclaredAccessibility == Accessibility.Public && !item.IsReadOnly && !item.IsStatic,
-                        StringKey = item.Name,
                         IsProperty = false,
                         IsField = true,
                         Name = item.Name,
@@ -523,8 +461,6 @@ namespace Stad.Analysis
                         continue;
                     }
 
-                    member.IntKey = hiddenIntKey++;
-                    stringMembers.Add(member.StringKey, member);
                     this.CollectCore(item.Type); // recursive collect
                 }
             }
@@ -558,6 +494,7 @@ namespace Stad.Analysis
                         Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                         ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
                         CustomFormatterTypeName = customFormatterAttr?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
+                        Attributes = item.Type.GetAttributes()
                     };
                     if (!member.IsReadable && !member.IsWritable)
                     {
@@ -565,51 +502,10 @@ namespace Stad.Analysis
                     }
 
                     TypedConstant? key = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.KeyAttribute))?.ConstructorArguments[0];
-                    if (key == null)
-                    {
-                        throw new MessagePackGeneratorResolveFailedException("all public members must mark KeyAttribute or IgnoreMemberAttribute." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                    }
-
-                    var intKey = (key.Value.Value is int) ? (int)key.Value.Value : (int?)null;
-                    var stringKey = (key.Value.Value is string) ? (string)key.Value.Value : (string)null;
-                    if (intKey == null && stringKey == null)
-                    {
-                        throw new MessagePackGeneratorResolveFailedException("both IntKey and StringKey are null." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                    }
 
                     if (searchFirst)
                     {
                         searchFirst = false;
-                        isIntKey = intKey != null;
-                    }
-                    else
-                    {
-                        if ((isIntKey && intKey == null) || (!isIntKey && stringKey == null))
-                        {
-                            throw new MessagePackGeneratorResolveFailedException("all members key type must be same." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                        }
-                    }
-
-                    if (isIntKey)
-                    {
-                        member.IntKey = (int)intKey;
-                        if (intMembers.ContainsKey(member.IntKey))
-                        {
-                            throw new MessagePackGeneratorResolveFailedException("key is duplicated, all members key must be unique." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                        }
-
-                        intMembers.Add(member.IntKey, member);
-                    }
-                    else
-                    {
-                        member.StringKey = (string)stringKey;
-                        if (stringMembers.ContainsKey(member.StringKey))
-                        {
-                            throw new MessagePackGeneratorResolveFailedException("key is duplicated, all members key must be unique." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                        }
-
-                        member.IntKey = hiddenIntKey++;
-                        stringMembers.Add(member.StringKey, member);
                     }
 
                     this.CollectCore(item.Type); // recursive collect
@@ -645,52 +541,9 @@ namespace Stad.Analysis
                         continue;
                     }
 
-                    TypedConstant? key = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.KeyAttribute))?.ConstructorArguments[0];
-                    if (key == null)
-                    {
-                        throw new MessagePackGeneratorResolveFailedException("all public members must mark KeyAttribute or IgnoreMemberAttribute." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                    }
-
-                    var intKey = (key.Value.Value is int) ? (int)key.Value.Value : (int?)null;
-                    var stringKey = (key.Value.Value is string) ? (string)key.Value.Value : (string)null;
-                    if (intKey == null && stringKey == null)
-                    {
-                        throw new MessagePackGeneratorResolveFailedException("both IntKey and StringKey are null." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                    }
-
                     if (searchFirst)
                     {
                         searchFirst = false;
-                        isIntKey = intKey != null;
-                    }
-                    else
-                    {
-                        if ((isIntKey && intKey == null) || (!isIntKey && stringKey == null))
-                        {
-                            throw new MessagePackGeneratorResolveFailedException("all members key type must be same." + " type: " + type.Name + " member:" + item.Name);
-                        }
-                    }
-
-                    if (isIntKey)
-                    {
-                        member.IntKey = (int)intKey;
-                        if (intMembers.ContainsKey(member.IntKey))
-                        {
-                            throw new MessagePackGeneratorResolveFailedException("key is duplicated, all members key must be unique." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                        }
-
-                        intMembers.Add(member.IntKey, member);
-                    }
-                    else
-                    {
-                        member.StringKey = (string)stringKey;
-                        if (stringMembers.ContainsKey(member.StringKey))
-                        {
-                            throw new MessagePackGeneratorResolveFailedException("key is duplicated, all members key must be unique." + " type: " + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " member:" + item.Name);
-                        }
-
-                        member.IntKey = hiddenIntKey++;
-                        stringMembers.Add(member.StringKey, member);
                     }
 
                     this.CollectCore(item.Type); // recursive collect
@@ -719,108 +572,6 @@ namespace Stad.Analysis
             var constructorParameters = new List<MemberSerializationInfo>();
             if (ctor != null)
             {
-                ILookup<string, KeyValuePair<string, MemberSerializationInfo>> constructorLookupDictionary = stringMembers.ToLookup(x => x.Key, x => x, StringComparer.OrdinalIgnoreCase);
-                do
-                {
-                    constructorParameters.Clear();
-                    var ctorParamIndex = 0;
-                    foreach (IParameterSymbol item in ctor.Parameters)
-                    {
-                        MemberSerializationInfo paramMember;
-                        if (isIntKey)
-                        {
-                            if (intMembers.TryGetValue(ctorParamIndex, out paramMember))
-                            {
-                                if (item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) == paramMember.Type && paramMember.IsReadable)
-                                {
-                                    constructorParameters.Add(paramMember);
-                                }
-                                else
-                                {
-                                    if (ctorEnumerator != null)
-                                    {
-                                        ctor = null;
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        throw new MessagePackGeneratorResolveFailedException("can't find matched constructor parameter, parameterType mismatch. type:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " parameterIndex:" + ctorParamIndex + " paramterType:" + item.Type.Name);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (ctorEnumerator != null)
-                                {
-                                    ctor = null;
-                                    continue;
-                                }
-                                else
-                                {
-                                    throw new MessagePackGeneratorResolveFailedException("can't find matched constructor parameter, index not found. type:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " parameterIndex:" + ctorParamIndex);
-                                }
-                            }
-                        }
-                        else
-                        {
-                            IEnumerable<KeyValuePair<string, MemberSerializationInfo>> hasKey = constructorLookupDictionary[item.Name];
-                            var len = hasKey.Count();
-                            if (len != 0)
-                            {
-                                if (len != 1)
-                                {
-                                    if (ctorEnumerator != null)
-                                    {
-                                        ctor = null;
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        throw new MessagePackGeneratorResolveFailedException("duplicate matched constructor parameter name:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " parameterName:" + item.Name + " paramterType:" + item.Type.Name);
-                                    }
-                                }
-
-                                paramMember = hasKey.First().Value;
-                                if (item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) == paramMember.Type && paramMember.IsReadable)
-                                {
-                                    constructorParameters.Add(paramMember);
-                                }
-                                else
-                                {
-                                    if (ctorEnumerator != null)
-                                    {
-                                        ctor = null;
-                                        continue;
-                                    }
-                                    else
-                                    {
-                                        throw new MessagePackGeneratorResolveFailedException("can't find matched constructor parameter, parameterType mismatch. type:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " parameterName:" + item.Name + " paramterType:" + item.Type.Name);
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                if (ctorEnumerator != null)
-                                {
-                                    ctor = null;
-                                    continue;
-                                }
-                                else
-                                {
-                                    throw new MessagePackGeneratorResolveFailedException("can't find matched constructor parameter, index not found. type:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + " parameterName:" + item.Name);
-                                }
-                            }
-                        }
-
-                        ctorParamIndex++;
-                    }
-                }
-                while (TryGetNextConstructor(ctorEnumerator, ref ctor));
-
-                if (ctor == null)
-                {
-                    throw new MessagePackGeneratorResolveFailedException("can't find matched constructor. type:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
-                }
             }
 
             var hasSerializationConstructor = type.AllInterfaces.Any(x => x.ApproximatelyEqual(this.typeReferences.IMessagePackSerializationCallbackReceiver));
@@ -836,14 +587,14 @@ namespace Stad.Analysis
             {
                 IsClass = isClass,
                 ConstructorParameters = constructorParameters.ToArray(),
-                IsIntKey = isIntKey,
-                Members = isIntKey ? intMembers.Values.ToArray() : stringMembers.Values.ToArray(),
+                Members = members.ToArray(),
                 Name = GetMinimallyQualifiedClassName(type),
                 FullName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                 Namespace = type.ContainingNamespace.IsGlobalNamespace ? null : type.ContainingNamespace.ToDisplayString(),
                 HasIMessagePackSerializationCallbackReceiver = hasSerializationConstructor,
                 NeedsCastOnAfter = needsCastOnAfter,
                 NeedsCastOnBefore = needsCastOnBefore,
+                Attributes = type.GetAttributes()
             };
 
             return info;

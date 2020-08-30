@@ -9,7 +9,7 @@ namespace Stad.Annotation
     }
 
     [AttributeUsage( AttributeTargets.Class | AttributeTargets.Struct)]
-    public class RegistryDefinitionAttribute : StadAnnotation
+    public class DataSetDefinition : StadAnnotation
     {
         
     }
@@ -77,7 +77,7 @@ namespace Stad.Annotation
     }
 
     [AttributeUsage( AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Class | AttributeTargets.Struct)]
-    public class HiddenAttribute : StadAnnotation
+    public class IgnoreMemberAttribute : StadAnnotation
     {
         
     }

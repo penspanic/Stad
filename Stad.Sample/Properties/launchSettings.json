@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Stad.Sample": {
+      "commandName": "Project",
+      "workingDirectory": "C:\\Users\\pensp\\Projects\\private\\Stad\\Stad.Sample"
+    }
+  }
+}

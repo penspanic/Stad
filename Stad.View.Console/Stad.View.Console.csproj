@@ -11,6 +11,7 @@
 
     <ItemGroup>
       <PackageReference Include="ConsoleAppFramework" Version="2.4.0" />
+      <PackageReference Include="Terminal.Gui" Version="0.81.0" />
     </ItemGroup>
 
 </Project>

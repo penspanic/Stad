@@ -19,13 +19,6 @@ namespace Stad.Analysis
 
         public string Namespace { get; set; }
 
-        public bool IsIntKey { get; set; }
-
-        public bool IsStringKey
-        {
-            get { return !this.IsIntKey; }
-        }
-
         public bool IsClass { get; set; }
 
         public bool IsStruct
@@ -45,7 +38,7 @@ namespace Stad.Analysis
 
         public MemberSerializationInfo GetMember(int index)
         {
-            return this.Members.FirstOrDefault(x => x.IntKey == index);
+            return this.Members[index];
         }
 
         public ImmutableArray<AttributeData> Attributes { get; set; }
@@ -60,11 +53,7 @@ namespace Stad.Analysis
         public bool IsWritable { get; set; }
 
         public bool IsReadable { get; set; }
-
-        public int IntKey { get; set; }
-
-        public string StringKey { get; set; }
-
+        
         public string Type { get; set; }
 
         public string Name { get; set; }

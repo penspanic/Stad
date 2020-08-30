@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Stad;
+using Stad.Analysis;
 using Stad.Annotation;
 using Stad.Container;
 using Stad.DataSet;
@@ -22,7 +23,7 @@ namespace Stad.Sample
         public string StringValue;
     }
 
-    [RegistryDefinition]
+    [DataSetDefinition]
     public class CommonDataSet
     {
         public SampleSingleModel SampleSingleModel;
@@ -54,6 +55,10 @@ namespace Stad.Sample
 
             Console.WriteLine($"SampleSingleModel : {commonDataSet.SampleSingleModel}");
             Console.WriteLine($"SampleKeyValueModel : {commonDataSet.SampleKeyValueModel}");
+
+            Console.WriteLine("Assembly analysis");
+            var registry = await StadAnalyzer.MakeRegistry("./");
+            Console.WriteLine(registry);
         }
     }
 }
