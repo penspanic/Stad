@@ -45,7 +45,7 @@ namespace Stad.Analysis
                     a.AttributeClass?.Name.Contains(nameof(Stad.Annotation.DataSetDefinition)) ?? false);
                 if (dataSetDefinitionAttribute != null)
                 {
-                    var dataSetModel = MakeDataSetModel(info);
+                    var dataSetModel = MakeDataSetModel(result, info);
                     if (dataSetModel != null)
                     {
                         dataSetModels.Add(dataSetModel);
@@ -58,6 +58,7 @@ namespace Stad.Analysis
 
         private static DataSetModel MakeDataSetModel(TypeCollectorResult collectorResult, ObjectSerializationInfo info)
         {
+            List<StadModel> allModels = new List<StadModel>();
             List<StadModel> listModels = new List<StadModel>();
             List<StadModel> singleModels = new List<StadModel>();
 
@@ -66,6 +67,7 @@ namespace Stad.Analysis
                 var memberObjectInfo = collectorResult.CollectedObjectInfo.FirstOrDefault(i => i.FullName == member.Type);
                 if (memberObjectInfo == null)
                 {
+                    // TODO: Find in closed generics
                     throw new Exception($"Member not found, {member.Type}");
                 }
 
@@ -81,6 +83,7 @@ namespace Stad.Analysis
                     throw new Exception($"Member create failed, {memberObjectInfo}");
                 }
 
+                allModels.Add(memberModel);
                 if (memberModel.Type.Contains("StadKeyValueCollection") == true)
                 {
                     listModels.Add(memberModel);
@@ -91,22 +94,43 @@ namespace Stad.Analysis
                 }
             }
 
+            foreach (StadModel model in allModels)
+            {
+                foreach (MemberDefinition memberDefinition in model.Members)
+                {
+                    var memberModel = allModels.Find(m => m.Type == memberDefinition.Type);
+                    if (memberModel != null)
+                    {
+                        memberDefinition.SetModel(memberModel);
+                    }
+                }
+            }
+
             return new DataSetModel(new ReadOnlyCollection<StadModel>(listModels), new ReadOnlyCollection<StadModel>(singleModels));
         }
 
-        private static StadModel MakeStadModel(TypeCollectorResult collectorResult, MemberSerializationInfo memberInfo, ObjectSerializationInfo objectInfo)
+        private static StadModel MakeStadModel(in TypeCollectorResult collectorResult, MemberSerializationInfo memberInfo, ObjectSerializationInfo objectInfo)
         {
             string type = objectInfo.Name;
+            List<MemberDefinition> memberDefinitions = new List<MemberDefinition>();
             foreach (MemberSerializationInfo eachMember in objectInfo.Members)
             {
-                // TODO: recursive
+                var memberDefinition = new MemberDefinition(eachMember.Type, eachMember.Name, eachMember.IsField ? MemberKind.Field : MemberKind.Property,
+                    MakeMemberAnnotationInfo(eachMember));
+                memberDefinitions.Add(memberDefinition);
             }
-            return new StadModel(type, MakeMemberAnnotationInfo(memberInfo));
+
+            return new StadModel(type, MakeMemberAnnotationInfo(memberInfo), new ReadOnlyCollection<MemberDefinition>(memberDefinitions));
         }
 
         private static AnnotationInfo MakeMemberAnnotationInfo(MemberSerializationInfo memberInfo)
         {
             var attributes = memberInfo.Attributes;
+            if (attributes.IsDefaultOrEmpty)
+            {
+                return new AnnotationInfo();
+            }
+
             var list = new List<Annotation.StadAnnotation>();
             foreach (AttributeData data in attributes)
             {

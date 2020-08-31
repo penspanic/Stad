@@ -14,11 +14,6 @@ namespace Stad.Annotation
         
     }
 
-    [AttributeUsage( AttributeTargets.Class | AttributeTargets.Struct)]
-    public class StadModelAttribute : StadAnnotation
-    {
-    }
-
     [StructLayout(LayoutKind.Explicit)]
     [AttributeUsage( AttributeTargets.Property | AttributeTargets.Field)]
     public class RangeAttribute : StadAnnotation

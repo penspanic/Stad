@@ -13,6 +13,11 @@ namespace Stad.Analysis
 {
     public class ObjectSerializationInfo
     {
+        public override string ToString()
+        {
+            return FullName;
+        }
+
         public string Name { get; set; }
 
         public string FullName { get; set; }
@@ -30,12 +35,6 @@ namespace Stad.Analysis
 
         public MemberSerializationInfo[] Members { get; set; }
 
-        public bool HasIMessagePackSerializationCallbackReceiver { get; set; }
-
-        public bool NeedsCastOnBefore { get; set; }
-
-        public bool NeedsCastOnAfter { get; set; }
-
         public MemberSerializationInfo GetMember(int index)
         {
             return this.Members[index];
@@ -46,6 +45,11 @@ namespace Stad.Analysis
 
     public class MemberSerializationInfo
     {
+        public override string ToString()
+        {
+            return $"{Type} {Name}";
+        }
+
         public bool IsProperty { get; set; }
 
         public bool IsField { get; set; }
@@ -59,8 +63,6 @@ namespace Stad.Analysis
         public string Name { get; set; }
 
         public string ShortTypeName { get; set; }
-
-        public string CustomFormatterTypeName { get; set; }
 
         public ImmutableArray<AttributeData> Attributes { get; set; }
     }

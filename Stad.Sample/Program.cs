@@ -10,17 +10,32 @@ using Stad.Serialization;
 
 namespace Stad.Sample
 {
-    [StadModel]
     public class SampleSingleModel
     {
         public int IntField;
         public int IntProperty { get; set; }
     }
 
-    [StadModel]
     public class SampleKeyValueModel
     {
         public string StringValue;
+    }
+
+    public class ComplexDataModel
+    {
+        public TestVector2 VectorField;
+        public GenericModel<int> IntGenericField;
+    }
+
+    public readonly struct TestVector2
+    {
+        public readonly int X;
+        public readonly int Y;
+    }
+
+    public class GenericModel<T>
+    {
+        public T GenericField;
     }
 
     [DataSetDefinition]
@@ -28,6 +43,7 @@ namespace Stad.Sample
     {
         public SampleSingleModel SampleSingleModel;
         public StadKeyValueCollection<SampleKeyValueModel> SampleKeyValueModel;
+        public ComplexDataModel ComplexDataModel;
     }
 
     class Program
@@ -57,7 +73,7 @@ namespace Stad.Sample
             Console.WriteLine($"SampleKeyValueModel : {commonDataSet.SampleKeyValueModel}");
 
             Console.WriteLine("Assembly analysis");
-            var registry = await StadAnalyzer.MakeRegistry("./");
+            var registry = await StadAnalyzer.MakeRegistry("../../");
             Console.WriteLine(registry);
         }
     }

@@ -37,7 +37,6 @@ namespace Stad.Analysis
         internal readonly INamedTypeSymbol UnionAttribute;
         internal readonly INamedTypeSymbol SerializationConstructorAttribute;
         internal readonly INamedTypeSymbol KeyAttribute;
-        internal readonly INamedTypeSymbol IgnoreAttribute;
         internal readonly INamedTypeSymbol IgnoreDataMemberAttribute;
         internal readonly INamedTypeSymbol IMessagePackSerializationCallbackReceiver;
         internal readonly INamedTypeSymbol MessagePackFormatterAttribute;
@@ -371,16 +370,6 @@ namespace Stad.Analysis
                 this.CollectCore(item);
             }
 
-            var formatterBuilder = new StringBuilder();
-            if (!type.ContainingNamespace.IsGlobalNamespace)
-            {
-                formatterBuilder.Append(type.ContainingNamespace.ToDisplayString() + ".");
-            }
-
-            formatterBuilder.Append(GetMinimallyQualifiedClassName(type));
-            formatterBuilder.Append("Formatter");
-
-
             // Collect only closed generic types (e.g. Foo<string>).
             var unboundGenericInfo = GetObjectInfo(type);
             collectedClosedTypeGenericInfo.Add(unboundGenericInfo);
@@ -403,13 +392,7 @@ namespace Stad.Analysis
 
                 foreach (IPropertySymbol item in RoslynExtensions.GetAllMembers(type).OfType<IPropertySymbol>().Where(x => !x.IsOverride))
                 {
-                    if (item.GetAttributes().Any(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.IgnoreAttribute) || x.AttributeClass.Name == this.typeReferences.IgnoreDataMemberAttribute.Name))
-                    {
-                        continue;
-                    }
-
-                    var customFormatterAttr = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.MessagePackFormatterAttribute))?.ConstructorArguments[0].Value as INamedTypeSymbol;
-
+                    // TODO: ignore 검사
                     var member = new MemberSerializationInfo
                     {
                         IsReadable = (item.GetMethod != null) && item.GetMethod.DeclaredAccessibility == Accessibility.Public && !item.IsStatic,
@@ -419,7 +402,6 @@ namespace Stad.Analysis
                         Name = item.Name,
                         Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                         ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
-                        CustomFormatterTypeName = customFormatterAttr?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     };
                     if (!member.IsReadable && !member.IsWritable)
                     {
@@ -427,16 +409,12 @@ namespace Stad.Analysis
                     }
 
                     members.Add(member);
-
                     this.CollectCore(item.Type); // recursive collect
                 }
 
                 foreach (IFieldSymbol item in RoslynExtensions.GetAllMembers(type).OfType<IFieldSymbol>())
                 {
-                    if (item.GetAttributes().Any(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.IgnoreAttribute) || x.AttributeClass.Name == this.typeReferences.IgnoreDataMemberAttribute.Name))
-                    {
-                        continue;
-                    }
+                    // TODO: ignore 검사
 
                     if (item.IsImplicitlyDeclared)
                     {
@@ -454,13 +432,13 @@ namespace Stad.Analysis
                         Name = item.Name,
                         Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                         ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
-                        CustomFormatterTypeName = customFormatterAttr?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     };
                     if (!member.IsReadable && !member.IsWritable)
                     {
                         continue;
                     }
 
+                    members.Add(member);
                     this.CollectCore(item.Type); // recursive collect
                 }
             }
@@ -477,12 +455,7 @@ namespace Stad.Analysis
                         continue; // .tt files don't generate good code for this yet: https://github.com/neuecc/MessagePack-CSharp/issues/390
                     }
 
-                    if (item.GetAttributes().Any(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.IgnoreAttribute) || x.AttributeClass.ApproximatelyEqual(this.typeReferences.IgnoreDataMemberAttribute)))
-                    {
-                        continue;
-                    }
-
-                    var customFormatterAttr = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.MessagePackFormatterAttribute))?.ConstructorArguments[0].Value as INamedTypeSymbol;
+                    // TODO: Ignore Member 처리
 
                     var member = new MemberSerializationInfo
                     {
@@ -493,7 +466,6 @@ namespace Stad.Analysis
                         Name = item.Name,
                         Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                         ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
-                        CustomFormatterTypeName = customFormatterAttr?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                         Attributes = item.Type.GetAttributes()
                     };
                     if (!member.IsReadable && !member.IsWritable)
@@ -501,13 +473,12 @@ namespace Stad.Analysis
                         continue;
                     }
 
-                    TypedConstant? key = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.KeyAttribute))?.ConstructorArguments[0];
-
                     if (searchFirst)
                     {
                         searchFirst = false;
                     }
 
+                    members.Add(member);
                     this.CollectCore(item.Type); // recursive collect
                 }
 
@@ -518,12 +489,7 @@ namespace Stad.Analysis
                         continue;
                     }
 
-                    if (item.GetAttributes().Any(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.IgnoreAttribute)))
-                    {
-                        continue;
-                    }
-
-                    var customFormatterAttr = item.GetAttributes().FirstOrDefault(x => x.AttributeClass.ApproximatelyEqual(this.typeReferences.MessagePackFormatterAttribute))?.ConstructorArguments[0].Value as INamedTypeSymbol;
+                    // TODO: ignore 검사
 
                     var member = new MemberSerializationInfo
                     {
@@ -534,7 +500,6 @@ namespace Stad.Analysis
                         Name = item.Name,
                         Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                         ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
-                        CustomFormatterTypeName = customFormatterAttr?.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     };
                     if (!member.IsReadable && !member.IsWritable)
                     {
@@ -546,6 +511,7 @@ namespace Stad.Analysis
                         searchFirst = false;
                     }
 
+                    members.Add(member);
                     this.CollectCore(item.Type); // recursive collect
                 }
             }
@@ -563,37 +529,14 @@ namespace Stad.Analysis
                 }
             }
 
-            // struct allows null ctor
-            if (ctor == null && isClass)
-            {
-                throw new MessagePackGeneratorResolveFailedException("can't find public constructor. type:" + type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
-            }
-
-            var constructorParameters = new List<MemberSerializationInfo>();
-            if (ctor != null)
-            {
-            }
-
-            var hasSerializationConstructor = type.AllInterfaces.Any(x => x.ApproximatelyEqual(this.typeReferences.IMessagePackSerializationCallbackReceiver));
-            var needsCastOnBefore = true;
-            var needsCastOnAfter = true;
-            if (hasSerializationConstructor)
-            {
-                needsCastOnBefore = !type.GetMembers("OnBeforeSerialize").Any();
-                needsCastOnAfter = !type.GetMembers("OnAfterDeserialize").Any();
-            }
-
             var info = new ObjectSerializationInfo
             {
                 IsClass = isClass,
-                ConstructorParameters = constructorParameters.ToArray(),
+                ConstructorParameters = null,
                 Members = members.ToArray(),
                 Name = GetMinimallyQualifiedClassName(type),
                 FullName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                 Namespace = type.ContainingNamespace.IsGlobalNamespace ? null : type.ContainingNamespace.ToDisplayString(),
-                HasIMessagePackSerializationCallbackReceiver = hasSerializationConstructor,
-                NeedsCastOnAfter = needsCastOnAfter,
-                NeedsCastOnBefore = needsCastOnBefore,
                 Attributes = type.GetAttributes()
             };
 

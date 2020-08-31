@@ -11,17 +11,23 @@ namespace Stad.Core
 
     public class MemberDefinition
     {
-        public MemberDefinition(string name, MemberKind kind, AnnotationInfo annotationInfo, StadModel model)
+        public MemberDefinition(string type, string name, MemberKind kind, AnnotationInfo annotationInfo)
         {
+            Type = type;
             Name = name;
             Kind = kind;
             AnnotationInfo = annotationInfo;
-            Model = model;
         }
 
+        public readonly string Type;
         public readonly string Name;
         public readonly MemberKind Kind;
         public readonly AnnotationInfo AnnotationInfo;
-        public readonly StadModel Model;
+        public StadModel Model { get; private set; }
+
+        public void SetModel(StadModel model)
+        {
+            Model = model;
+        }
     }
 }
