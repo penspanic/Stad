@@ -67,8 +67,11 @@ namespace Stad.Analysis
                 var memberObjectInfo = collectorResult.CollectedObjectInfo.FirstOrDefault(i => i.FullName == member.Type);
                 if (memberObjectInfo == null)
                 {
-                    // TODO: Find in closed generics
-                    throw new Exception($"Member not found, {member.Type}");
+                    memberObjectInfo = collectorResult.CollectedClosedTypeGenericInfo.FirstOrDefault(i => i.FullName == member.Type);
+                    if (memberObjectInfo == null)
+                    {
+                        throw new Exception($"Member not found, {member.Type}");
+                    }
                 }
 
                 if (memberObjectInfo.Attributes.FirstOrDefault(a =>
