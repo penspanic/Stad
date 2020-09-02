@@ -72,8 +72,8 @@ namespace Stad.Sample
             Console.WriteLine($"SampleSingleModel : {commonDataSet.SampleSingleModel}");
             Console.WriteLine($"SampleKeyValueModel : {commonDataSet.SampleKeyValueModel}");
 
-            Console.WriteLine("Assembly analysis");
-            var registry = await StadAnalyzer.MakeRegistry("../../");
+            Console.WriteLine("Assembly analysis - by source analyze");
+            var registry = await StadAnalyzer.MakeRegistryFromSource("../../");
             Console.WriteLine(registry);
         }
     }

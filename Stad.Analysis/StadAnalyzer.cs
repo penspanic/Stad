@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.CodeAnalysis;
@@ -17,12 +18,32 @@ namespace Stad.Analysis
 {
     public static class StadAnalyzer
     {
-        public static async Task<StadRegistry> MakeRegistry(string rootPath)
+        private class AnalyzeContext
+        {
+            public AnalyzeContext(TypeCollectorResult collectResult)
+            {
+                CollectResult = collectResult;
+            }
+
+            public readonly TypeCollectorResult CollectResult;
+            public List<StadModel> AllModels = new List<StadModel>();
+        }
+
+        public static async Task<StadRegistry> MakeRegistryFromSource(string rootPath)
         {
             var compilation = await CreateFromDirectoryAsync(rootPath, null, CancellationToken.None);
-            TypeCollector typeCollector = new TypeCollector(compilation, true, false, (str) => Console.WriteLine(str));
-            var result = typeCollector.Collect();
+            TypeCollectorForCompilation typeCollectorForCompilation = new TypeCollectorForCompilation(compilation, true, (str) => Console.WriteLine(str));
+            var result = typeCollectorForCompilation.Collect();
             return MakeRegistry(result);
+        }
+
+        public static async Task<StadRegistry> MakeRegistryFromAssembly(string[] dllPaths)
+        {
+            foreach (string path in dllPaths)
+            {
+                Assembly assembly = Assembly.LoadFile(path);
+                assembly.GetTypes()
+            }
         }
 
         private static Task<CSharpCompilation> CreateFromProjectAsync(string[] csprojs, string[] preprocessorSymbols, CancellationToken cancellationToken)
@@ -35,8 +56,20 @@ namespace Stad.Analysis
             return PseudoCompilation.CreateFromDirectoryAsync(directoryRoot, preprocessorSymbols, cancellationToken);
         }
 
+        private static ObjectSerializationInfo GetObjectInfo(TypeCollectorResult collectorResult, string type)
+        {
+            var memberObjectInfo = collectorResult.CollectedObjectInfo.FirstOrDefault(i => i.FullName == type);
+            if (memberObjectInfo == null)
+            {
+                memberObjectInfo = collectorResult.CollectedClosedTypeGenericInfo.FirstOrDefault(i => i.FullName == type);
+            }
+
+            return memberObjectInfo;
+        }
+
         private static StadRegistry MakeRegistry(TypeCollectorResult result)
         {
+            AnalyzeContext context = new AnalyzeContext(result);
             List<DataSetModel> dataSetModels = new List<DataSetModel>();
 
             foreach (ObjectSerializationInfo info in result.CollectedObjectInfo)
@@ -45,7 +78,7 @@ namespace Stad.Analysis
                     a.AttributeClass?.Name.Contains(nameof(Stad.Annotation.DataSetDefinition)) ?? false);
                 if (dataSetDefinitionAttribute != null)
                 {
-                    var dataSetModel = MakeDataSetModel(result, info);
+                    var dataSetModel = MakeDataSetModel(context, info);
                     if (dataSetModel != null)
                     {
                         dataSetModels.Add(dataSetModel);
@@ -56,22 +89,17 @@ namespace Stad.Analysis
             return StadRegistry.Create(new ReadOnlyCollection<DataSetModel>(dataSetModels));
         }
 
-        private static DataSetModel MakeDataSetModel(TypeCollectorResult collectorResult, ObjectSerializationInfo info)
+        private static DataSetModel MakeDataSetModel(AnalyzeContext context, ObjectSerializationInfo info)
         {
-            List<StadModel> allModels = new List<StadModel>();
             List<StadModel> listModels = new List<StadModel>();
             List<StadModel> singleModels = new List<StadModel>();
 
             foreach (MemberSerializationInfo member in info.Members)
             {
-                var memberObjectInfo = collectorResult.CollectedObjectInfo.FirstOrDefault(i => i.FullName == member.Type);
+                var memberObjectInfo = GetObjectInfo(context.CollectResult, member.Type);
                 if (memberObjectInfo == null)
                 {
-                    memberObjectInfo = collectorResult.CollectedClosedTypeGenericInfo.FirstOrDefault(i => i.FullName == member.Type);
-                    if (memberObjectInfo == null)
-                    {
-                        throw new Exception($"Member not found, {member.Type}");
-                    }
+                    throw new Exception($"Member not found, {member.Type}");
                 }
 
                 if (memberObjectInfo.Attributes.FirstOrDefault(a =>
@@ -80,13 +108,12 @@ namespace Stad.Analysis
                     continue;
                 }
 
-                StadModel memberModel = MakeStadModel(collectorResult,member, memberObjectInfo);
+                StadModel memberModel = MakeStadModel(context, memberObjectInfo);
                 if (memberModel == null)
                 {
                     throw new Exception($"Member create failed, {memberObjectInfo}");
                 }
 
-                allModels.Add(memberModel);
                 if (memberModel.Type.Contains("StadKeyValueCollection") == true)
                 {
                     listModels.Add(memberModel);
@@ -97,45 +124,63 @@ namespace Stad.Analysis
                 }
             }
 
-            foreach (StadModel model in allModels)
+            foreach (StadModel model in context.AllModels)
             {
                 foreach (MemberDefinition memberDefinition in model.Members)
                 {
-                    var memberModel = allModels.Find(m => m.Type == memberDefinition.Type);
-                    if (memberModel != null)
-                    {
-                        memberDefinition.SetModel(memberModel);
-                    }
+                    var memberModel = context.AllModels.Find(m => m.Type == memberDefinition.Type);
+                    memberDefinition.SetModel(memberModel);
                 }
             }
 
-            return new DataSetModel(new ReadOnlyCollection<StadModel>(listModels), new ReadOnlyCollection<StadModel>(singleModels));
+            return new DataSetModel(info.FullName, new ReadOnlyCollection<StadModel>(listModels), new ReadOnlyCollection<StadModel>(singleModels));
         }
 
-        private static StadModel MakeStadModel(in TypeCollectorResult collectorResult, MemberSerializationInfo memberInfo, ObjectSerializationInfo objectInfo)
+        // TODO: renaming
+        private static StadModel MakeStadModel(in AnalyzeContext context, ObjectSerializationInfo objectInfo)
         {
-            string type = objectInfo.Name;
             List<MemberDefinition> memberDefinitions = new List<MemberDefinition>();
             foreach (MemberSerializationInfo eachMember in objectInfo.Members)
             {
                 var memberDefinition = new MemberDefinition(eachMember.Type, eachMember.Name, eachMember.IsField ? MemberKind.Field : MemberKind.Property,
                     MakeMemberAnnotationInfo(eachMember));
                 memberDefinitions.Add(memberDefinition);
+                if (context.AllModels.Exists(m => m.Type == eachMember.Type) == false)
+                {
+                    var memberObjectInfo = GetObjectInfo(context.CollectResult, memberDefinition.Type);
+                    if (memberObjectInfo != null)
+                    {
+                        MakeStadModel(context, memberObjectInfo);
+                    }
+                }
             }
 
-            return new StadModel(type, MakeMemberAnnotationInfo(memberInfo), new ReadOnlyCollection<MemberDefinition>(memberDefinitions));
+            var model = new StadModel(objectInfo.FullName, MakeObjectAnnotationInfo(objectInfo),
+                new ReadOnlyCollection<MemberDefinition>(memberDefinitions));
+            context.AllModels.Add(model);
+
+            return model;
+        }
+
+        private static AnnotationInfo MakeObjectAnnotationInfo(ObjectSerializationInfo objectInfo)
+        {
+            return MakeAnnotationInfo(objectInfo.Attributes);
         }
 
         private static AnnotationInfo MakeMemberAnnotationInfo(MemberSerializationInfo memberInfo)
         {
-            var attributes = memberInfo.Attributes;
-            if (attributes.IsDefaultOrEmpty)
+            return MakeAnnotationInfo(memberInfo.Attributes);
+        }
+
+        private static AnnotationInfo MakeAnnotationInfo(ImmutableArray<AttributeData> attributeDatas)
+        {
+            if (attributeDatas.IsDefaultOrEmpty)
             {
                 return new AnnotationInfo();
             }
 
             var list = new List<Annotation.StadAnnotation>();
-            foreach (AttributeData data in attributes)
+            foreach (AttributeData data in attributeDatas)
             {
                 if (data.AttributeClass == null)
                 {

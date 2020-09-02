@@ -20,6 +20,11 @@ namespace Stad.Core
     /// </summary>
     public class StadRegistry
     {
+        public override string ToString()
+        {
+            return base.ToString();
+        }
+
         public static StadRegistry Create(ReadOnlyCollection<DataSetModel> dataSets)
         {
             StadRegistry stadRegistry = new StadRegistry(dataSets);

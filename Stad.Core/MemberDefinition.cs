@@ -19,6 +19,12 @@ namespace Stad.Core
             AnnotationInfo = annotationInfo;
         }
 
+        // TODO: Caching 해둬도 될만한 내용인 듯
+        public override string ToString()
+        {
+            return $"{Type} {Name}";
+        }
+
         public readonly string Type;
         public readonly string Name;
         public readonly MemberKind Kind;

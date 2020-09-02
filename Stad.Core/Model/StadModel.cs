@@ -4,6 +4,11 @@ namespace Stad.Core.Model
 {
     public class StadModel : IStadModel
     {
+        public override string ToString()
+        {
+            return Type;
+        }
+
         public StadModel(string type, AnnotationInfo annotationInfo, ReadOnlyCollection<MemberDefinition> members)
         {
             Type = type;
