@@ -170,7 +170,7 @@ namespace Stad.Analysis
                 Namespace = type.ContainingNamespace.IsGlobalNamespace ? null : type.ContainingNamespace.ToDisplayString(),
                 FullName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                 UnderlyingType = type.EnumUnderlyingType.ToDisplayString(BinaryWriteFormat),
-                Attributes = type.GetAttributes()
+                Attributes = NeutralAttributeData.FromAttributeDataArray(type.GetAttributes())
             };
 
             this.collectedEnumInfo.Add(info);
@@ -221,8 +221,6 @@ namespace Stad.Analysis
                     continue; // .tt files don't generate good code for this yet: https://github.com/neuecc/MessagePack-CSharp/issues/390
                 }
 
-                // TODO: Ignore Member 처리
-
                 var member = new MemberSerializationInfo
                 {
                     IsReadable = (item.GetMethod != null) && item.GetMethod.DeclaredAccessibility == Accessibility.Public && !item.IsStatic,
@@ -232,7 +230,7 @@ namespace Stad.Analysis
                     Name = item.Name,
                     Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                     ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
-                    Attributes = item.Type.GetAttributes()
+                    Attributes = NeutralAttributeData.FromAttributeDataArray(item.Type.GetAttributes())
                 };
                 if (!member.IsReadable && !member.IsWritable)
                 {
@@ -254,8 +252,6 @@ namespace Stad.Analysis
                 {
                     continue;
                 }
-
-                // TODO: ignore 검사
 
                 var member = new MemberSerializationInfo
                 {
@@ -289,7 +285,7 @@ namespace Stad.Analysis
                 Name = GetMinimallyQualifiedClassName(type),
                 FullName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
                 Namespace = type.ContainingNamespace.IsGlobalNamespace ? null : type.ContainingNamespace.ToDisplayString(),
-                Attributes = type.GetAttributes()
+                Attributes = NeutralAttributeData.FromAttributeDataArray(type.GetAttributes())
             };
 
             return info;

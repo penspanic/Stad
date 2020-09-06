@@ -125,7 +125,7 @@ namespace Stad.Analysis
                 Namespace = type.Namespace,
                 FullName = type.FullName,
                 UnderlyingType = type.GetEnumUnderlyingType().FullName,
-                Attributes = default, // TODO: implement
+                Attributes = NeutralAttributeData.FromCustomAttributeArray(type.GetCustomAttributes())
             };
 
             this.collectedEnumInfo.Add(info);
@@ -169,8 +169,6 @@ namespace Stad.Analysis
 
             foreach (PropertyInfo item in type.GetProperties())
             {
-                // TODO: Ignore Member 처리
-
                 var member = new MemberSerializationInfo
                 {
                     IsReadable = (item.GetMethod != null) && item.GetMethod.IsPublic,
@@ -180,7 +178,7 @@ namespace Stad.Analysis
                     Name = item.Name,
                     Type = item.PropertyType.FullName,
                     ShortTypeName = item.PropertyType.Name,
-                    Attributes = default // TODO: implement
+                    Attributes = NeutralAttributeData.FromCustomAttributeArray(item.GetCustomAttributes())
                 };
                 if (!member.IsReadable && !member.IsWritable)
                 {
@@ -198,8 +196,6 @@ namespace Stad.Analysis
 
             foreach (FieldInfo item in type.GetFields())
             {
-                // TODO: ignore 검사
-
                 var member = new MemberSerializationInfo
                 {
                     IsReadable = item.IsPublic && !item.IsStatic,
@@ -232,7 +228,7 @@ namespace Stad.Analysis
                 Name = GetMinimallyQualifiedClassName(type),
                 FullName = type.FullName,
                 Namespace = type.Namespace,
-                Attributes = default // TODO: implement
+                Attributes = NeutralAttributeData.FromCustomAttributeArray(type.GetCustomAttributes())
             };
 
             return info;

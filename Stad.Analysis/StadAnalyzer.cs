@@ -13,6 +13,7 @@ using Stad.Container;
 using Stad.Core;
 using Stad.Core.Model;
 using Stad.Core.Source.Assembly;
+using Utf8Json;
 
 namespace Stad.Analysis
 {
@@ -87,7 +88,7 @@ namespace Stad.Analysis
                 }
 
                 var dataSetDefinitionAttribute = info.Attributes.FirstOrDefault(a =>
-                    a.AttributeClass?.Name.Contains(nameof(Stad.Annotation.DataSetDefinition)) ?? false);
+                    a.Type.Contains(nameof(Stad.Annotation.DataSetDefinition)));
                 if (dataSetDefinitionAttribute != null)
                 {
                     var dataSetModel = MakeDataSetModel(context, info);
@@ -115,7 +116,7 @@ namespace Stad.Analysis
                 }
 
                 if (memberObjectInfo.Attributes.FirstOrDefault(a =>
-                    a.AttributeClass?.Name.Contains(nameof(Stad.Annotation.IgnoreMemberAttribute)) ?? false) != null)
+                    a.Type.Contains(nameof(Stad.Annotation.IgnoreMemberAttribute))) != null)
                 {
                     continue;
                 }
@@ -155,7 +156,7 @@ namespace Stad.Analysis
             foreach (MemberSerializationInfo eachMember in objectInfo.Members)
             {
                 var memberDefinition = new MemberDefinition(eachMember.Type, eachMember.Name, eachMember.IsField ? MemberKind.Field : MemberKind.Property,
-                    MakeMemberAnnotationInfo(eachMember));
+                    MakeAnnotationInfo(context, eachMember.Attributes));
                 memberDefinitions.Add(memberDefinition);
                 if (context.AllModels.Exists(m => m.Type == eachMember.Type) == false)
                 {
@@ -167,24 +168,14 @@ namespace Stad.Analysis
                 }
             }
 
-            var model = new StadModel(objectInfo.FullName, MakeObjectAnnotationInfo(objectInfo),
+            var model = new StadModel(objectInfo.FullName, MakeAnnotationInfo(context, objectInfo.Attributes),
                 new ReadOnlyCollection<MemberDefinition>(memberDefinitions));
             context.AllModels.Add(model);
 
             return model;
         }
 
-        private static AnnotationInfo MakeObjectAnnotationInfo(ObjectSerializationInfo objectInfo)
-        {
-            return MakeAnnotationInfo(objectInfo.Attributes);
-        }
-
-        private static AnnotationInfo MakeMemberAnnotationInfo(MemberSerializationInfo memberInfo)
-        {
-            return MakeAnnotationInfo(memberInfo.Attributes);
-        }
-
-        private static AnnotationInfo MakeAnnotationInfo(ImmutableArray<AttributeData> attributeDatas)
+        private static AnnotationInfo MakeAnnotationInfo(in AnalyzeContext context, ImmutableArray<NeutralAttributeData> attributeDatas)
         {
             if (attributeDatas.IsDefaultOrEmpty)
             {
@@ -192,21 +183,49 @@ namespace Stad.Analysis
             }
 
             var list = new List<Annotation.StadAnnotation>();
-            foreach (AttributeData data in attributeDatas)
+            foreach (NeutralAttributeData data in attributeDatas)
             {
-                if (data.AttributeClass == null)
+                if (string.IsNullOrEmpty(data.Type))
                 {
                     continue;
                 }
 
-                // TODO: implement
-                // TODO: client side Annotation과 Stad Model에서의 Annotation은 다른 것을 사용해야 하는가?
-
-                switch (data.AttributeClass.Name)
+                if (data.Type.Contains("System."))
                 {
-                    case nameof(Annotation.IdForAttribute):
-                        list.Add(new IdForAttribute(null));
+                    continue;
+                }
+
+                #region SpecialCase
+
+                if (data.Type == "Utf8Json.JsonFormatterAttribute")
+                {
+                    list.Add(new JsonFormatterProxyAttribute(data.Arguments));
+                    continue;
+                }
+                #endregion
+
+                switch (data.Type)
+                {
+                    case nameof(Annotation.ReferenceAttribute):
+                        list.Add(ReferenceAttribute.FromArgument(data.Arguments));
                         break;
+                    case nameof (Annotation.RangeAttribute):
+                        list.Add(RangeAttribute.FromArgument(data.Arguments));
+                        break;
+                    case nameof(Annotation.IgnoreMemberAttribute):
+                        list.Add(new IgnoreMemberAttribute());
+                        break;
+                    case nameof(Annotation.NameAttribute):
+                        list.Add(NameAttribute.FromArgument(data.Arguments));
+                        break;
+                    case nameof(Annotation.DescAttribute):
+                        list.Add(DescAttribute.FromArgument(data.Arguments));
+                        break;
+                    case nameof(Annotation.DataSetDefinition):
+                        list.Add(new DataSetDefinition());
+                        break;
+                    default:
+                        throw new Exception($"Not handled attribute : {data.Type}");
                 }
             }
 

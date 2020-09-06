@@ -22,7 +22,7 @@ namespace Stad.Core
     {
         public override string ToString()
         {
-            return base.ToString();
+            return string.Join(",", DataSets);
         }
 
         public static StadRegistry Create(ReadOnlyCollection<DataSetModel> dataSets)

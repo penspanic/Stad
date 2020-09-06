@@ -1,0 +1,14 @@
+﻿{
+  "Vector2Field":{
+    "X":10,
+    "Y":22
+  },
+  "IntGenericField":
+  {
+    "GenericField":3
+  },
+  "RangeIntField":"7",
+  "SampleReference":{
+    "Key":""
+  }
+}

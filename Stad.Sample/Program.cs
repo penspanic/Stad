@@ -13,6 +13,14 @@ using Stad.Serialization;
 
 namespace Stad.Sample
 {
+    [DataSetDefinition]
+    public class CommonDataSet
+    {
+        public SampleSingleModel SampleSingleModel;
+        public StadKeyValueCollection<SampleKeyValueModel> SampleKeyValueModel;
+        public ComplexDataModel ComplexDataModel;
+    }
+
     public class SampleSingleModel
     {
         public int IntField;
@@ -28,6 +36,10 @@ namespace Stad.Sample
     {
         public TestVector2 VectorField;
         public GenericModel<int> IntGenericField;
+        [Range(-10, 10)]
+        public int RangeIntField;
+        [Reference(typeof(SampleKeyValueModel))]
+        public StadReference SampleReference;
     }
 
     public readonly struct TestVector2
@@ -41,17 +53,9 @@ namespace Stad.Sample
         public T GenericField;
     }
 
-    [DataSetDefinition]
-    public class CommonDataSet
-    {
-        public SampleSingleModel SampleSingleModel;
-        public StadKeyValueCollection<SampleKeyValueModel> SampleKeyValueModel;
-        public ComplexDataModel ComplexDataModel;
-    }
-
     class Program
     {
-        static async Task Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
             StadSettings.Initialize();
             Console.WriteLine("Hello World!");
@@ -75,15 +79,18 @@ namespace Stad.Sample
             Console.WriteLine($"SampleSingleModel : {commonDataSet.SampleSingleModel}");
             Console.WriteLine($"SampleKeyValueModel : {commonDataSet.SampleKeyValueModel}");
 
-            Console.WriteLine("Assembly analysis - by source analyze");
-            var registryFromSource = await StadAnalyzer.MakeRegistryFromSource("../../");
-            Console.WriteLine(registryFromSource);
+            // Source 분석은 일단 보류..
+            //Console.WriteLine("Assembly analysis - by source analyze");
+            //var registryFromSource = await StadAnalyzer.MakeRegistryFromSource("../../");
+            //Console.WriteLine(registryFromSource);
 
             Console.WriteLine("Assembly analysis - by assembly analyze");
             string executingDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
             var assemblyFiles = System.IO.Directory.EnumerateFiles(executingDir, "*.dll", SearchOption.AllDirectories).ToArray();
             var registry = await StadAnalyzer.MakeRegistryFromAssembly(assemblyFiles);
             Console.WriteLine(registry);
+
+            return 0;
         }
     }
 }

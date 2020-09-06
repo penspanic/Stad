@@ -7,7 +7,7 @@ namespace Stad.Core.Model
     {
         public override string ToString()
         {
-            return $"List:{ListModels?.Count} Single:{SingleModels?.Count}";
+            return $"[{Name}|List:{ListModels?.Count} Single:{SingleModels?.Count}]";
         }
 
         public DataSetModel(string name, ReadOnlyCollection<StadModel> listModels, ReadOnlyCollection<StadModel> singleModels)
