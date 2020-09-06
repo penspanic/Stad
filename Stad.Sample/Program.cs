@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using Stad;
 using Stad.Analysis;
@@ -73,7 +76,13 @@ namespace Stad.Sample
             Console.WriteLine($"SampleKeyValueModel : {commonDataSet.SampleKeyValueModel}");
 
             Console.WriteLine("Assembly analysis - by source analyze");
-            var registry = await StadAnalyzer.MakeRegistryFromSource("../../");
+            var registryFromSource = await StadAnalyzer.MakeRegistryFromSource("../../");
+            Console.WriteLine(registryFromSource);
+
+            Console.WriteLine("Assembly analysis - by assembly analyze");
+            string executingDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var assemblyFiles = System.IO.Directory.EnumerateFiles(executingDir, "*.dll", SearchOption.AllDirectories).ToArray();
+            var registry = await StadAnalyzer.MakeRegistryFromAssembly(assemblyFiles);
             Console.WriteLine(registry);
         }
     }

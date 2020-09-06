@@ -39,11 +39,18 @@ namespace Stad.Analysis
 
         public static async Task<StadRegistry> MakeRegistryFromAssembly(string[] dllPaths)
         {
+            List<Assembly> assemblies = new List<Assembly>();
             foreach (string path in dllPaths)
             {
-                Assembly assembly = Assembly.LoadFile(path);
-                assembly.GetTypes()
+                Assembly assembly = Assembly.LoadFrom(path);
+                //string absolutePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+                // Assembly assembly = Assembly.LoadFile(absolutePath);
+                assemblies.Add(assembly);
             }
+
+            TypeCollectorForAssembly typeCollectorForAssembly = new TypeCollectorForAssembly(assemblies.ToArray(), (str) => Console.WriteLine(str));
+            var result = typeCollectorForAssembly.Collect();
+            return MakeRegistry(result);
         }
 
         private static Task<CSharpCompilation> CreateFromProjectAsync(string[] csprojs, string[] preprocessorSymbols, CancellationToken cancellationToken)
@@ -74,6 +81,11 @@ namespace Stad.Analysis
 
             foreach (ObjectSerializationInfo info in result.CollectedObjectInfo)
             {
+                if (info.Attributes.IsDefaultOrEmpty == true)
+                {
+                    continue;
+                }
+
                 var dataSetDefinitionAttribute = info.Attributes.FirstOrDefault(a =>
                     a.AttributeClass?.Name.Contains(nameof(Stad.Annotation.DataSetDefinition)) ?? false);
                 if (dataSetDefinitionAttribute != null)

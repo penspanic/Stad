@@ -207,8 +207,8 @@ namespace Stad.Analysis
                     IsProperty = true,
                     IsField = false,
                     Name = item.Name,
-                    Type = item.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                    ShortTypeName = item.Type.ToDisplayString(BinaryWriteFormat),
+                    Type = item.FieldType.FullName,
+                    ShortTypeName = item.FieldType.Name,
                 };
                 if (!member.IsReadable && !member.IsWritable)
                 {
@@ -221,7 +221,7 @@ namespace Stad.Analysis
                 }
 
                 members.Add(member);
-                this.CollectCore(item.Type); // recursive collect
+                this.CollectCore(item.FieldType); // recursive collect
             }
 
             var info = new ObjectSerializationInfo
@@ -230,9 +230,9 @@ namespace Stad.Analysis
                 ConstructorParameters = null,
                 Members = members.ToArray(),
                 Name = GetMinimallyQualifiedClassName(type),
-                FullName = type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat),
-                Namespace = type.ContainingNamespace.IsGlobalNamespace ? null : type.ContainingNamespace.ToDisplayString(),
-                Attributes = type.GetAttributes()
+                FullName = type.FullName,
+                Namespace = type.Namespace,
+                Attributes = default // TODO: implement
             };
 
             return info;
@@ -241,6 +241,9 @@ namespace Stad.Analysis
         private static string GetMinimallyQualifiedClassName(Type type)
         {
             var name = type.FullName;
+            if (name == null)
+                return string.Empty;
+
             name = name.Replace(".", "_");
             name = name.Replace("<", "_");
             name = name.Replace(">", "_");

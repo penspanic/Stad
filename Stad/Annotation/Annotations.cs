@@ -14,17 +14,17 @@ namespace Stad.Annotation
         
     }
 
-    [StructLayout(LayoutKind.Explicit)]
+    //[StructLayout(LayoutKind.Explicit)]
     [AttributeUsage( AttributeTargets.Property | AttributeTargets.Field)]
     public class RangeAttribute : StadAnnotation
     {
-        [FieldOffset(0)]
+        //[FieldOffset(0)]
         public readonly int IntStart;
-        [FieldOffset(4)]
+        //[FieldOffset(4)]
         public readonly int IntEnd;
-        [FieldOffset(0)]
+        //[FieldOffset(0)]
         public readonly float FloatStart;
-        [FieldOffset(4)]
+        //[FieldOffset(4)]
         public readonly float FloatEnd;
 
         public RangeAttribute(int start, int end)
