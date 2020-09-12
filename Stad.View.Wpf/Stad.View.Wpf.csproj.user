@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="UI\AssemblySourceWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Components\DataSourceCandidate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Components\Navigator.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\DataSourceWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="UI\AssemblySourceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Components\DataSourceCandidate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Components\Navigator.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\DataSourceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>

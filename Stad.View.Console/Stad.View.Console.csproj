@@ -6,7 +6,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Stad.Analysis\Stad.Analysis.csproj" />
       <ProjectReference Include="..\Stad.Core\Stad.Core.csproj" />
+      <ProjectReference Include="..\Stad.Diff\Stad.Diff.csproj" />
     </ItemGroup>
 
     <ItemGroup>

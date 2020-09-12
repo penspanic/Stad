@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad", "Stad\Stad.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Test", "Stad.Test\Stad.Test.csproj", "{2B6B99E5-7048-4831-8FF5-C3037CE90E36}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.View.Wpf", "Stad.View.Wpf\Stad.View.Wpf.csproj", "{F8A8861D-18C1-4FC2-BE38-B72F2A400133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B6B99E5-7048-4831-8FF5-C3037CE90E36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8A8861D-18C1-4FC2-BE38-B72F2A400133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8A8861D-18C1-4FC2-BE38-B72F2A400133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8A8861D-18C1-4FC2-BE38-B72F2A400133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8A8861D-18C1-4FC2-BE38-B72F2A400133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
