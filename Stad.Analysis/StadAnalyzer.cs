@@ -38,14 +38,18 @@ namespace Stad.Analysis
             return MakeRegistry(result);
         }
 
-        public static async Task<StadRegistry> MakeRegistryFromAssembly(string[] dllPaths)
+        public static async Task<StadRegistry> MakeRegistry(IAssemblySource assemblySource)
         {
+            if (assemblySource.IsAvailable == false)
+            {
+                throw new Exception($"AssemblySource not initialized : {assemblySource}");
+            }
+
             List<Assembly> assemblies = new List<Assembly>();
-            foreach (string path in dllPaths)
+            string[] assemblyNames = await assemblySource.GetAssemblyTargetFiles();
+            foreach (string path in assemblyNames)
             {
                 Assembly assembly = Assembly.LoadFrom(path);
-                //string absolutePath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
-                // Assembly assembly = Assembly.LoadFile(absolutePath);
                 assemblies.Add(assembly);
             }
 

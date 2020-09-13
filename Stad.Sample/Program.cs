@@ -8,6 +8,7 @@ using Stad;
 using Stad.Analysis;
 using Stad.Annotation;
 using Stad.Container;
+using Stad.Core.Source.Assembly;
 using Stad.DataSet;
 using Stad.Serialization;
 
@@ -86,8 +87,7 @@ namespace Stad.Sample
 
             Console.WriteLine("Assembly analysis - by assembly analyze");
             string executingDir = System.IO.Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            var assemblyFiles = System.IO.Directory.EnumerateFiles(executingDir, "*.dll", SearchOption.AllDirectories).ToArray();
-            var registry = await StadAnalyzer.MakeRegistryFromAssembly(assemblyFiles);
+            var registry = await StadAnalyzer.MakeRegistry(new LocalFileAssemblySource(executingDir));
             Console.WriteLine(registry);
 
             return 0;
