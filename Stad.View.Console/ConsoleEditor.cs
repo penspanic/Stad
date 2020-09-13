@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Stad.Analysis;
 using Stad.Core;
+using Stad.Core.Source.Assembly;
 using Terminal.Gui;
 
 namespace Stad.View.Console
@@ -51,8 +52,13 @@ namespace Stad.View.Console
 
             string dirPath = openDialog.FilePaths[0];
 
-            var assemblyFiles = System.IO.Directory.EnumerateFiles(dirPath, "*.dll", SearchOption.AllDirectories).ToArray();
-            _stadRegistry = await StadAnalyzer.MakeRegistryFromAssembly(assemblyFiles);
+            var source = new LocalFileAssemblySource(dirPath);
+            if (await source.Initialize() == false)
+            {
+                return;
+            }
+
+            _stadRegistry = await StadAnalyzer.MakeRegistry(source);
             if (_stadRegistry != null)
             {
                 _assemblyWindow = new Window("Assembly") {X = 1, Y = 1, Width = Dim.Fill(), Height = Dim.Fill()};

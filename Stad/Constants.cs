@@ -2,6 +2,6 @@ namespace Stad
 {
     public static class Constants
     {
-        public const string ManifestPath = "Manifest.json";
+        public const string DataSetManifestPath = "Manifest.json";
     }
 }

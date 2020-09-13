@@ -15,7 +15,7 @@ namespace Stad.Core.Source
             RootPath = rootPath;
         }
 
-        public Task<bool> Initialize()
+        public virtual Task<bool> Initialize()
         {
             return Task.FromResult(true);
         }

@@ -36,7 +36,7 @@ namespace Stad.DataSet
 
         public Task<List<DataSetItem>> GetItems()
         {
-            string path = _rootPath + Constants.ManifestPath;
+            string path = _rootPath + Constants.DataSetManifestPath;
             if (File.Exists(path) == false)
             {
                 return null;
