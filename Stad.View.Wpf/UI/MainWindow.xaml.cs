@@ -1,4 +1,5 @@
 ﻿using Stad.View.Wpf.UI;
+using Stad.View.Wpf.UI.Renderers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,16 @@ using System.Windows.Shapes;
 
 namespace Stad.View.Wpf
 {
+    public class TabContext
+    {
+        public TabRenderType Type;
+    }
+
+    public enum TabRenderType
+    {
+        MainView,
+    }
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -24,6 +35,10 @@ namespace Stad.View.Wpf
         public MainWindow()
         {
             InitializeComponent();
+            foreach (TabItem tabItem in tabControl.Items)
+            {
+                InitTabItem(tabItem);
+            }
         }
 
         #region Menu
@@ -31,11 +46,33 @@ namespace Stad.View.Wpf
         {
             new AssemblySourceWindow().ShowDialog();
         }
-        #endregion
 
         private void Data_Open_Click(object sender, RoutedEventArgs e)
         {
             new DataSourceWindow().ShowDialog();
+        }
+        #endregion
+
+        private void TabControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+        }
+
+        private void InitTabItem(TabItem tabItem)
+        {
+            if (tabItem.DataContext == null)
+            {
+                tabItem.DataContext = new TabContext();
+            }
+
+            var context = tabItem.DataContext as TabContext;
+            tabItem.Content = null;
+            tabItem.Header = context.Type.ToString();
+            switch (context.Type)
+            {
+                case TabRenderType.MainView:
+                    tabItem.Content = new MainViewRenderer();
+                    break;
+            }
         }
     }
 }

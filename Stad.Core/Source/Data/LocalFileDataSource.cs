@@ -20,7 +20,7 @@ namespace Stad.Core.Source.Data
         {
             foreach (string directory in System.IO.Directory.EnumerateDirectories(RootPath))
             {
-                if (System.IO.File.Exists(directory + Constants.DataSetManifestPath) == false)
+                if (System.IO.File.Exists(System.IO.Path.Combine(directory, Constants.DataSetManifestPath)) == false)
                 {
                     continue;
                 }

@@ -5,7 +5,16 @@
     <Compile Update="UI\AssemblySourceWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Components\AssemblySourceDescripter.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Components\DataSetElement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="UI\Components\DataSourceCandidate.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Components\DataSourceDescripter.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Components\Navigator.xaml.cs">
@@ -14,18 +23,36 @@
     <Compile Update="UI\DataSourceWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="UI\Renderers\MainViewRenderer.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="UI\AssemblySourceWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Components\AssemblySourceCandidate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Components\AssemblySourceDescripter.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Components\DataSetElement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Components\DataSourceCandidate.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Components\DataSourceDescripter.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Components\Navigator.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\DataSourceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Renderers\MainViewRenderer.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

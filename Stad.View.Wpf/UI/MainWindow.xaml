@@ -3,9 +3,25 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Stad.View.Wpf"
-        mc:Ignorable="d"
+		xmlns:su="clr-namespace:Stad.View.Wpf.UI.Utilities"
+		xmlns:sc="clr-namespace:Stad.View.Wpf.UI.Components"
+		mc:Ignorable="d"
         Title="Stad" Height="326" Width="737" MinWidth="800" MinHeight="450">
+	<Window.Resources>
+		<su:TabSizeConverter x:Key="TabSizeConverter"/>
+		<Style TargetType="{x:Type TabItem}">
+			<Setter Property="Width">
+				<Setter.Value>
+					<MultiBinding Converter="{StaticResource TabSizeConverter}">
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+            AncestorType={x:Type TabControl}}" />
+						<Binding RelativeSource="{RelativeSource Mode=FindAncestor,
+            AncestorType={x:Type TabControl}}" Path="ActualWidth" />
+					</MultiBinding>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</Window.Resources>
 	<Grid x:Name="_grid_Full">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="30"></RowDefinition>
@@ -19,13 +35,10 @@
 				<MenuItem Header="O_pen" Click="Data_Open_Click"/>
 			</MenuItem>
 		</Menu>
-		<TabControl Grid.Row="1" Width="Auto" x:Name="TabControl" IsSynchronizedWithCurrentItem="True" Height="Auto">
-			<Grid>
-				<TabItem Grid.Column="0" Header="TabItem"/>
-				<TabItem Grid.Column="1" Header="TabItem"/>
-				<TabItem Grid.Column="2" Header="TabItem"/>
-				<TabItem Grid.Column="3" Header="TabItem"/>
-			</Grid>
+		<TabControl Grid.Row="1" Width="Auto" x:Name="tabControl" IsSynchronizedWithCurrentItem="True" Height="Auto" SelectionChanged="TabControl_SelectionChanged">
+			<TabItem Grid.Column="0" Header="TabHeader">
+				<Label FontSize="100">Empty Tab Body</Label>
+			</TabItem>
 		</TabControl>
 	</Grid>
 </Window>

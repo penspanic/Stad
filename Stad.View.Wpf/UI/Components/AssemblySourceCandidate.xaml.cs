@@ -1,4 +1,5 @@
-﻿using Stad.Core.Source.Data;
+﻿using Stad.Core.Source.Assembly;
+using Stad.Core.Source.Data;
 using Stad.View.Wpf.Types;
 using System;
 using System.Windows;
@@ -7,13 +8,13 @@ using System.Windows.Controls;
 namespace Stad.View.Wpf.UI.Components
 {
     /// <summary>
-    /// Interaction logic for DataSourceCandidate.xaml
+    /// Interaction logic for AssemblySourceCandidate.xaml
     /// </summary>
-    public partial class DataSourceCandidate : UserControl
+    public partial class AssemblySourceCandidate : UserControl
     {
         public DataSourceType DataSourceType { get; }
 
-        public DataSourceCandidate()
+        public AssemblySourceCandidate()
         {
             InitializeComponent();
         }
@@ -23,23 +24,21 @@ namespace Stad.View.Wpf.UI.Components
             if (DataSourceType == DataSourceType.LocalFile)
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                var result = dialog.ShowDialog();
-                if (result != System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
                     return;
                 }
 
                 try
                 {
-                    var dataSource = new LocalFileDataSource(dialog.SelectedPath);
-                    if (await dataSource.Initialize() == false)
+                    var assemblySource = new LocalFileAssemblySource(dialog.SelectedPath);
+                    if (await assemblySource.Initialize() == false)
                     {
-                        MessageBox.Show("DataSource initialize failed!");
+                        MessageBox.Show("Assembly initialize failed!");
                         return;
                     }
 
-                    StadApplication.SetDataSource(dataSource);
-                    Window.GetWindow(this).Close();
+                    StadApplication.SetAssemblySource(assemblySource);
                 }
                 catch (Exception exception)
                 {

@@ -10,11 +10,13 @@ namespace Stad.DataSet
 {
     public class FileSystemDataSet : IDataSet
     {
+        public string Name { get; }
         private readonly string _rootPath;
 
         public FileSystemDataSet(string rootPath)
         {
             _rootPath = rootPath;
+            Name = Path.GetFileName(rootPath);
         }
 
         public Task<object> LoadAsync(Type type, DataSetItem item)
