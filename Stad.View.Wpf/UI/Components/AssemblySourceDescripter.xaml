@@ -10,11 +10,12 @@
 		<Border BorderThickness="1" BorderBrush="Black">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition/>
+					<RowDefinition Height="50"/>
 					<RowDefinition/>
 				</Grid.RowDefinitions>
-				<Label Grid.Row="0" FontSize="30" HorizontalAlignment="Center">Header</Label>
-				<Label Grid.Row="1">Body</Label>
+				<Label Name="label_Title" Grid.Row="0" FontSize="30" HorizontalAlignment="Center">Header</Label>
+				<StackPanel Name="stackpanel_DataSetElement" Grid.Row="1" Orientation="Horizontal">
+				</StackPanel>
 			</Grid>
 		</Border>
 	</Grid>

@@ -1,4 +1,6 @@
-﻿using Stad.Core.Source.Assembly;
+﻿using Stad.Analysis;
+using Stad.Core;
+using Stad.Core.Source.Assembly;
 using Stad.Core.Source.Data;
 using System;
 using System.Collections.Generic;
@@ -11,6 +13,7 @@ namespace Stad.View.Wpf
         Undefined = 0,
         DataSourceChanged,
         AssemblySourceChanged,
+        StadRegistryChanged,
     }
 
     // TODO: 멀티쓰레딩 고려 필요.
@@ -18,6 +21,7 @@ namespace Stad.View.Wpf
     {
         public static IDataSource DataSource { get; private set; }
         public static IAssemblySource AssemblySource { get; private set; }
+        public static StadRegistry StadRegistry { get; private set; }
 
         public static event Action<StadEventType> StadEvent
         {
@@ -54,6 +58,17 @@ namespace Stad.View.Wpf
             ExceptionHelper.AssertAviliable(assemblySource);
             AssemblySource = assemblySource;
             RaiseEvent(StadEventType.AssemblySourceChanged);
+        }
+
+        public static void SetStadRegitry(StadRegistry stadRegistry)
+        {
+            StadRegistry = stadRegistry;
+            RaiseEvent(StadEventType.StadRegistryChanged);
+        }
+
+        public static void Show(object context)
+        {
+
         }
     }
 }

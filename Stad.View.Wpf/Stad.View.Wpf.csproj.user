@@ -2,13 +2,16 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup />
   <ItemGroup>
-    <Compile Update="UI\AssemblySourceWindow.xaml.cs">
+    <Compile Update="UI\Windows\AssemblySourceWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Components\AssemblySourceDescripter.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Components\DataSetElement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Components\DataSetModelElement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Components\DataSourceCandidate.xaml.cs">
@@ -20,7 +23,10 @@
     <Compile Update="UI\Components\Navigator.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="UI\DataSourceWindow.xaml.cs">
+    <Compile Update="UI\Windows\DataSourceWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="UI\Renderers\DataSetModelRenderer.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="UI\Renderers\MainViewRenderer.xaml.cs">
@@ -28,7 +34,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="UI\AssemblySourceWindow.xaml">
+    <Page Update="UI\Windows\AssemblySourceWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Components\AssemblySourceCandidate.xaml">
@@ -40,6 +46,9 @@
     <Page Update="UI\Components\DataSetElement.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="UI\Components\DataSetModelElement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="UI\Components\DataSourceCandidate.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -49,7 +58,10 @@
     <Page Update="UI\Components\Navigator.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="UI\DataSourceWindow.xaml">
+    <Page Update="UI\Windows\DataSourceWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="UI\Renderers\DataSetModelRenderer.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="UI\Renderers\MainViewRenderer.xaml">

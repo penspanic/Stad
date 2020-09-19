@@ -1,4 +1,6 @@
-﻿using Stad.Core.Source.Assembly;
+﻿using Stad.Analysis;
+using Stad.Core;
+using Stad.Core.Source.Assembly;
 using Stad.Core.Source.Data;
 using Stad.View.Wpf.Types;
 using System;
@@ -24,7 +26,7 @@ namespace Stad.View.Wpf.UI.Components
             if (DataSourceType == DataSourceType.LocalFile)
             {
                 var dialog = new System.Windows.Forms.FolderBrowserDialog();
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                if (dialog.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 {
                     return;
                 }
@@ -39,6 +41,16 @@ namespace Stad.View.Wpf.UI.Components
                     }
 
                     StadApplication.SetAssemblySource(assemblySource);
+
+                    StadRegistry stadRegistry = await StadAnalyzer.MakeRegistry(assemblySource);
+                    // TODO: analyze 스텝 분리?
+                    if (stadRegistry == null)
+                    {
+                        MessageBox.Show("Make Registry failed!");
+                        return;
+                    }
+
+                    StadApplication.SetStadRegitry(stadRegistry);
                 }
                 catch (Exception exception)
                 {

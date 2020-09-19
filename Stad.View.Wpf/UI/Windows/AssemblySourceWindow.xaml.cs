@@ -8,25 +8,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Stad.View.Wpf.UI.Renderers
+namespace Stad.View.Wpf.UI.Windows
 {
     /// <summary>
-    /// Interaction logic for MainViewRenderer.xaml
+    /// Interaction logic for AssemblyWindow.xaml
     /// </summary>
-    public partial class MainViewRenderer : UserControl, IRenderer
+    public partial class AssemblySourceWindow : Window
     {
-        public TabItem Tabitem { get; private set; }
-        public MainViewRenderer()
+        public AssemblySourceWindow()
         {
             InitializeComponent();
-        }
-
-        public void SetTabItem(TabItem tabItem)
-        {
-            Tabitem = Tabitem;
         }
     }
 }

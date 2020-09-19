@@ -1,4 +1,5 @@
-﻿using Stad.View.Wpf.UI;
+﻿using Stad.Core.Model;
+using Stad.View.Wpf.UI;
 using Stad.View.Wpf.UI.Renderers;
 using System;
 using System.Collections.Generic;
@@ -15,7 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Stad.View.Wpf
+namespace Stad.View.Wpf.UI.Windows
 {
     public class TabContext
     {
@@ -30,15 +31,23 @@ namespace Stad.View.Wpf
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, IWindow
     {
         public MainWindow()
         {
             InitializeComponent();
+            WindowManager.Register(this);
+
             foreach (TabItem tabItem in tabControl.Items)
             {
                 InitTabItem(tabItem);
             }
+        }
+
+        protected override void OnClosed(EventArgs e)
+        {
+            base.OnClosed(e);
+            WindowManager.Unregister(this);
         }
 
         #region Menu
@@ -73,6 +82,24 @@ namespace Stad.View.Wpf
                     tabItem.Content = new MainViewRenderer();
                     break;
             }
+
+            if (tabItem.Content is IRenderer renderer)
+            {
+                renderer.SetTabItem(tabItem);
+            }
         }
+
+        #region IWindow Implementation
+        public bool TryShow(object context)
+        {
+            if (context is DataSetModel dataSetModel)
+            {
+                // TODO: show in tab
+                return true;
+            }
+
+            return false;
+        }
+        #endregion
     }
 }

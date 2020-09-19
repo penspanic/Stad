@@ -8,23 +8,25 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Stad.View.Wpf.UI
+namespace Stad.View.Wpf.UI.Renderers
 {
     /// <summary>
-    /// Interaction logic for DataSourceWindow.xaml
+    /// Interaction logic for DataSetModelRenderer.xaml
     /// </summary>
-    public partial class DataSourceWindow : Window
+    public partial class DataSetModelRenderer : AbstractRenderer, IRenderer
     {
-        public DataSourceWindow()
+        public TabItem TabItem { get; private set; }
+        public DataSetModelRenderer()
         {
             InitializeComponent();
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        public void SetTabItem(TabItem tabItem)
         {
-
+            TabItem = tabItem;
         }
     }
 }

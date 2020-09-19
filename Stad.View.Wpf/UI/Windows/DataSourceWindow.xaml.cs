@@ -10,16 +10,21 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Stad.View.Wpf.UI
+namespace Stad.View.Wpf.UI.Windows
 {
     /// <summary>
-    /// Interaction logic for AssemblyWindow.xaml
+    /// Interaction logic for DataSourceWindow.xaml
     /// </summary>
-    public partial class AssemblySourceWindow : Window
+    public partial class DataSourceWindow : Window
     {
-        public AssemblySourceWindow()
+        public DataSourceWindow()
         {
             InitializeComponent();
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

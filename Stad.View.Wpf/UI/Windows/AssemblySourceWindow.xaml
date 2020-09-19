@@ -4,9 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stad.View.Wpf.UI"
-        xmlns:Components="clr-namespace:Stad.View.Wpf.UI.Components" x:Class="Stad.View.Wpf.UI.DataSourceWindow"
+        xmlns:Components="clr-namespace:Stad.View.Wpf.UI.Components" x:Class="Stad.View.Wpf.UI.Windows.AssemblySourceWindow"
         mc:Ignorable="d"
-        Title="DataSourceWindow" Height="407" Width="295">
+        Title="AssemblyWindow" Height="407" Width="295">
 	<Grid x:Name="_grid_Full">
 		<Label x:Name="_label_Current_S" Content="Current:" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="70"/>
 		<Label x:Name="_label_Current" Content="null" HorizontalAlignment="Left" Margin="78,0,0,0" VerticalAlignment="Top" Width="207"/>
@@ -15,8 +15,8 @@
 				<RowDefinition/>
 				<RowDefinition/>
 			</Grid.RowDefinitions>
-			<Components:DataSourceCandidate Grid.Row="0"/>
-			<Components:DataSourceCandidate Grid.Row="1"/>
+			<Components:AssemblySourceCandidate Grid.Row="0"/>
+			<Components:AssemblySourceCandidate Grid.Row="1"/>
 		</Grid>
 	</Grid>
 </Window>
