@@ -1,0 +1,8 @@
+syntax = "proto3";
+package stad.client;
+
+enum SourceType {
+  Undefined = 0;
+  LocalFile = 1;
+  AmazonS3 = 2;
+}
