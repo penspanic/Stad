@@ -21,9 +21,9 @@ namespace Stad.Core
             for (int i = 0; i < Annotations.Length; ++i)
             {
                 var annotation = Annotations[i];
-                if (annotation is T)
+                if (annotation is T found)
                 {
-                    return annotation as T;
+                    return found;
                 }
             }
 
