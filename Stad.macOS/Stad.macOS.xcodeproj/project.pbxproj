@@ -1,0 +1,748 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1309428E8AA3016C1597AEC5 /* Pods_Stad_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57D9F9587073E4A9646EF545 /* Pods_Stad_macOS.framework */; };
+		5B42395D25972A6C00D5E1C1 /* Stad_macOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42395C25972A6C00D5E1C1 /* Stad_macOSApp.swift */; };
+		5B42395F25972A6C00D5E1C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42395E25972A6C00D5E1C1 /* ContentView.swift */; };
+		5B42396125972A6D00D5E1C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B42396025972A6D00D5E1C1 /* Assets.xcassets */; };
+		5B42396425972A6D00D5E1C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B42396325972A6D00D5E1C1 /* Preview Assets.xcassets */; };
+		5B42397025972A6D00D5E1C1 /* Stad_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42396F25972A6D00D5E1C1 /* Stad_macOSTests.swift */; };
+		5B42397B25972A6D00D5E1C1 /* Stad_macOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42397A25972A6D00D5E1C1 /* Stad_macOSUITests.swift */; };
+		5B42399025972B6F00D5E1C1 /* StadServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42398F25972B6F00D5E1C1 /* StadServiceImpl.swift */; };
+		DC93169B29A7F86004877BAE /* Pods_Stad_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A037C70ADBA481996569D389 /* Pods_Stad_macOSTests.framework */; };
+		DCEA1B0B3AAD1E76C9389053 /* Pods_Stad_macOS_Stad_macOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC30F0E4A20BD69B7C21D70B /* Pods_Stad_macOS_Stad_macOSUITests.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5B42396C25972A6D00D5E1C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B42395125972A6C00D5E1C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B42395825972A6C00D5E1C1;
+			remoteInfo = Stad.macOS;
+		};
+		5B42397725972A6D00D5E1C1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5B42395125972A6C00D5E1C1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5B42395825972A6C00D5E1C1;
+			remoteInfo = Stad.macOS;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		4A4D5593D5963B97BC191D59 /* Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-Stad.macOS-Stad.macOSUITests/Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		57D9F9587073E4A9646EF545 /* Pods_Stad_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stad_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B42395925972A6C00D5E1C1 /* Stad.macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stad.macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B42395C25972A6C00D5E1C1 /* Stad_macOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stad_macOSApp.swift; sourceTree = "<group>"; };
+		5B42395E25972A6C00D5E1C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5B42396025972A6D00D5E1C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		5B42396325972A6D00D5E1C1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5B42396525972A6D00D5E1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B42396625972A6D00D5E1C1 /* Stad_macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Stad_macOS.entitlements; sourceTree = "<group>"; };
+		5B42396B25972A6D00D5E1C1 /* Stad.macOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Stad.macOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B42396F25972A6D00D5E1C1 /* Stad_macOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stad_macOSTests.swift; sourceTree = "<group>"; };
+		5B42397125972A6D00D5E1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B42397625972A6D00D5E1C1 /* Stad.macOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Stad.macOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B42397A25972A6D00D5E1C1 /* Stad_macOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stad_macOSUITests.swift; sourceTree = "<group>"; };
+		5B42397C25972A6D00D5E1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5B42398F25972B6F00D5E1C1 /* StadServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadServiceImpl.swift; sourceTree = "<group>"; };
+		6B81AAD3C5802885D65BEEBE /* Pods-Stad.macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOSTests.release.xcconfig"; path = "Target Support Files/Pods-Stad.macOSTests/Pods-Stad.macOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		A037C70ADBA481996569D389 /* Pods_Stad_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stad_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE5A311206E1B874E1ACA7BD /* Pods-Stad.macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOS.release.xcconfig"; path = "Target Support Files/Pods-Stad.macOS/Pods-Stad.macOS.release.xcconfig"; sourceTree = "<group>"; };
+		C30F3D872C67A67BB74AE84C /* Pods-Stad.macOS-Stad.macOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOS-Stad.macOSUITests.release.xcconfig"; path = "Target Support Files/Pods-Stad.macOS-Stad.macOSUITests/Pods-Stad.macOS-Stad.macOSUITests.release.xcconfig"; sourceTree = "<group>"; };
+		EF949C6BB74B8C1E6B1666B7 /* Pods-Stad.macOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOS.debug.xcconfig"; path = "Target Support Files/Pods-Stad.macOS/Pods-Stad.macOS.debug.xcconfig"; sourceTree = "<group>"; };
+		FC30F0E4A20BD69B7C21D70B /* Pods_Stad_macOS_Stad_macOSUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stad_macOS_Stad_macOSUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD590E06F872C013A4D1929A /* Pods-Stad.macOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOSTests.debug.xcconfig"; path = "Target Support Files/Pods-Stad.macOSTests/Pods-Stad.macOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5B42395625972A6C00D5E1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1309428E8AA3016C1597AEC5 /* Pods_Stad_macOS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B42396825972A6D00D5E1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DC93169B29A7F86004877BAE /* Pods_Stad_macOSTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B42397325972A6D00D5E1C1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DCEA1B0B3AAD1E76C9389053 /* Pods_Stad_macOS_Stad_macOSUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0CA8B60C83256569A3F01728 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				EF949C6BB74B8C1E6B1666B7 /* Pods-Stad.macOS.debug.xcconfig */,
+				BE5A311206E1B874E1ACA7BD /* Pods-Stad.macOS.release.xcconfig */,
+				4A4D5593D5963B97BC191D59 /* Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig */,
+				C30F3D872C67A67BB74AE84C /* Pods-Stad.macOS-Stad.macOSUITests.release.xcconfig */,
+				FD590E06F872C013A4D1929A /* Pods-Stad.macOSTests.debug.xcconfig */,
+				6B81AAD3C5802885D65BEEBE /* Pods-Stad.macOSTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5B42395025972A6C00D5E1C1 = {
+			isa = PBXGroup;
+			children = (
+				5B42395B25972A6C00D5E1C1 /* Stad.macOS */,
+				5B42396E25972A6D00D5E1C1 /* Stad.macOSTests */,
+				5B42397925972A6D00D5E1C1 /* Stad.macOSUITests */,
+				5B42395A25972A6C00D5E1C1 /* Products */,
+				0CA8B60C83256569A3F01728 /* Pods */,
+				98D56EEBD63EA8BDCD94703E /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		5B42395A25972A6C00D5E1C1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5B42395925972A6C00D5E1C1 /* Stad.macOS.app */,
+				5B42396B25972A6D00D5E1C1 /* Stad.macOSTests.xctest */,
+				5B42397625972A6D00D5E1C1 /* Stad.macOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		5B42395B25972A6C00D5E1C1 /* Stad.macOS */ = {
+			isa = PBXGroup;
+			children = (
+				5B42398E25972B5B00D5E1C1 /* Core */,
+				5B42395C25972A6C00D5E1C1 /* Stad_macOSApp.swift */,
+				5B42395E25972A6C00D5E1C1 /* ContentView.swift */,
+				5B42396025972A6D00D5E1C1 /* Assets.xcassets */,
+				5B42396525972A6D00D5E1C1 /* Info.plist */,
+				5B42396625972A6D00D5E1C1 /* Stad_macOS.entitlements */,
+				5B42396225972A6D00D5E1C1 /* Preview Content */,
+			);
+			path = Stad.macOS;
+			sourceTree = "<group>";
+		};
+		5B42396225972A6D00D5E1C1 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				5B42396325972A6D00D5E1C1 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5B42396E25972A6D00D5E1C1 /* Stad.macOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				5B42396F25972A6D00D5E1C1 /* Stad_macOSTests.swift */,
+				5B42397125972A6D00D5E1C1 /* Info.plist */,
+			);
+			path = Stad.macOSTests;
+			sourceTree = "<group>";
+		};
+		5B42397925972A6D00D5E1C1 /* Stad.macOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5B42397A25972A6D00D5E1C1 /* Stad_macOSUITests.swift */,
+				5B42397C25972A6D00D5E1C1 /* Info.plist */,
+			);
+			path = Stad.macOSUITests;
+			sourceTree = "<group>";
+		};
+		5B42398E25972B5B00D5E1C1 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				5B42398F25972B6F00D5E1C1 /* StadServiceImpl.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		98D56EEBD63EA8BDCD94703E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				57D9F9587073E4A9646EF545 /* Pods_Stad_macOS.framework */,
+				FC30F0E4A20BD69B7C21D70B /* Pods_Stad_macOS_Stad_macOSUITests.framework */,
+				A037C70ADBA481996569D389 /* Pods_Stad_macOSTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		5B42395825972A6C00D5E1C1 /* Stad.macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B42397F25972A6D00D5E1C1 /* Build configuration list for PBXNativeTarget "Stad.macOS" */;
+			buildPhases = (
+				188DD5B2CD9FDB3229B7D9D0 /* [CP] Check Pods Manifest.lock */,
+				5B42395525972A6C00D5E1C1 /* Sources */,
+				5B42395625972A6C00D5E1C1 /* Frameworks */,
+				5B42395725972A6C00D5E1C1 /* Resources */,
+				E6598A41A6D205EFD0409400 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Stad.macOS;
+			productName = Stad.macOS;
+			productReference = 5B42395925972A6C00D5E1C1 /* Stad.macOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		5B42396A25972A6D00D5E1C1 /* Stad.macOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B42398225972A6D00D5E1C1 /* Build configuration list for PBXNativeTarget "Stad.macOSTests" */;
+			buildPhases = (
+				323593D935565843B07F65AC /* [CP] Check Pods Manifest.lock */,
+				5B42396725972A6D00D5E1C1 /* Sources */,
+				5B42396825972A6D00D5E1C1 /* Frameworks */,
+				5B42396925972A6D00D5E1C1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B42396D25972A6D00D5E1C1 /* PBXTargetDependency */,
+			);
+			name = Stad.macOSTests;
+			productName = Stad.macOSTests;
+			productReference = 5B42396B25972A6D00D5E1C1 /* Stad.macOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		5B42397525972A6D00D5E1C1 /* Stad.macOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B42398525972A6D00D5E1C1 /* Build configuration list for PBXNativeTarget "Stad.macOSUITests" */;
+			buildPhases = (
+				0BC98513E1E4C9ED2C28633E /* [CP] Check Pods Manifest.lock */,
+				5B42397225972A6D00D5E1C1 /* Sources */,
+				5B42397325972A6D00D5E1C1 /* Frameworks */,
+				5B42397425972A6D00D5E1C1 /* Resources */,
+				A3D17743F26BA439C81B9A32 /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5B42397825972A6D00D5E1C1 /* PBXTargetDependency */,
+			);
+			name = Stad.macOSUITests;
+			productName = Stad.macOSUITests;
+			productReference = 5B42397625972A6D00D5E1C1 /* Stad.macOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		5B42395125972A6C00D5E1C1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
+				TargetAttributes = {
+					5B42395825972A6C00D5E1C1 = {
+						CreatedOnToolsVersion = 12.3;
+					};
+					5B42396A25972A6D00D5E1C1 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 5B42395825972A6C00D5E1C1;
+					};
+					5B42397525972A6D00D5E1C1 = {
+						CreatedOnToolsVersion = 12.3;
+						TestTargetID = 5B42395825972A6C00D5E1C1;
+					};
+				};
+			};
+			buildConfigurationList = 5B42395425972A6C00D5E1C1 /* Build configuration list for PBXProject "Stad.macOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 5B42395025972A6C00D5E1C1;
+			productRefGroup = 5B42395A25972A6C00D5E1C1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5B42395825972A6C00D5E1C1 /* Stad.macOS */,
+				5B42396A25972A6D00D5E1C1 /* Stad.macOSTests */,
+				5B42397525972A6D00D5E1C1 /* Stad.macOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		5B42395725972A6C00D5E1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B42396425972A6D00D5E1C1 /* Preview Assets.xcassets in Resources */,
+				5B42396125972A6D00D5E1C1 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B42396925972A6D00D5E1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B42397425972A6D00D5E1C1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BC98513E1E4C9ED2C28633E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Stad.macOS-Stad.macOSUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		188DD5B2CD9FDB3229B7D9D0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Stad.macOS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		323593D935565843B07F65AC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Stad.macOSTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3D17743F26BA439C81B9A32 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Stad.macOS-Stad.macOSUITests/Pods-Stad.macOS-Stad.macOSUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Stad.macOS-Stad.macOSUITests/Pods-Stad.macOS-Stad.macOSUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Stad.macOS-Stad.macOSUITests/Pods-Stad.macOS-Stad.macOSUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E6598A41A6D205EFD0409400 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Stad.macOS/Pods-Stad.macOS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Stad.macOS/Pods-Stad.macOS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Stad.macOS/Pods-Stad.macOS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5B42395525972A6C00D5E1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B42399025972B6F00D5E1C1 /* StadServiceImpl.swift in Sources */,
+				5B42395F25972A6C00D5E1C1 /* ContentView.swift in Sources */,
+				5B42395D25972A6C00D5E1C1 /* Stad_macOSApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B42396725972A6D00D5E1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B42397025972A6D00D5E1C1 /* Stad_macOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B42397225972A6D00D5E1C1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5B42397B25972A6D00D5E1C1 /* Stad_macOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5B42396D25972A6D00D5E1C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B42395825972A6C00D5E1C1 /* Stad.macOS */;
+			targetProxy = 5B42396C25972A6D00D5E1C1 /* PBXContainerItemProxy */;
+		};
+		5B42397825972A6D00D5E1C1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5B42395825972A6C00D5E1C1 /* Stad.macOS */;
+			targetProxy = 5B42397725972A6D00D5E1C1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		5B42397D25972A6D00D5E1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		5B42397E25972A6D00D5E1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		5B42398025972A6D00D5E1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EF949C6BB74B8C1E6B1666B7 /* Pods-Stad.macOS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Stad.macOS/Stad_macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Stad.macOS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Stad.macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "GeunHee.Stad-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		5B42398125972A6D00D5E1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE5A311206E1B874E1ACA7BD /* Pods-Stad.macOS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Stad.macOS/Stad_macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_ASSET_PATHS = "\"Stad.macOS/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				INFOPLIST_FILE = Stad.macOS/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "GeunHee.Stad-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		5B42398325972A6D00D5E1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD590E06F872C013A4D1929A /* Pods-Stad.macOSTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Stad.macOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "GeunHee.Stad-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stad.macOS.app/Contents/MacOS/Stad.macOS";
+			};
+			name = Debug;
+		};
+		5B42398425972A6D00D5E1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6B81AAD3C5802885D65BEEBE /* Pods-Stad.macOSTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Stad.macOSTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "GeunHee.Stad-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Stad.macOS.app/Contents/MacOS/Stad.macOS";
+			};
+			name = Release;
+		};
+		5B42398625972A6D00D5E1C1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4A4D5593D5963B97BC191D59 /* Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Stad.macOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "GeunHee.Stad-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Stad.macOS;
+			};
+			name = Debug;
+		};
+		5B42398725972A6D00D5E1C1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C30F3D872C67A67BB74AE84C /* Pods-Stad.macOS-Stad.macOSUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = Stad.macOSUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "GeunHee.Stad-macOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = Stad.macOS;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		5B42395425972A6C00D5E1C1 /* Build configuration list for PBXProject "Stad.macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B42397D25972A6D00D5E1C1 /* Debug */,
+				5B42397E25972A6D00D5E1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B42397F25972A6D00D5E1C1 /* Build configuration list for PBXNativeTarget "Stad.macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B42398025972A6D00D5E1C1 /* Debug */,
+				5B42398125972A6D00D5E1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B42398225972A6D00D5E1C1 /* Build configuration list for PBXNativeTarget "Stad.macOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B42398325972A6D00D5E1C1 /* Debug */,
+				5B42398425972A6D00D5E1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B42398525972A6D00D5E1C1 /* Build configuration list for PBXNativeTarget "Stad.macOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B42398625972A6D00D5E1C1 /* Debug */,
+				5B42398725972A6D00D5E1C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 5B42395125972A6C00D5E1C1 /* Project object */;
+}

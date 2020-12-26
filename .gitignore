@@ -3,3 +3,17 @@ obj/
 bin/
 .vs/
 Stad.sln.DotSettings.user
+
+### Xcode ###
+## User settings
+xcuserdata/
+
+## Gcc Patch
+/*.gcno
+
+### Xcode Patch ###
+*.xcodeproj/*
+!*.xcodeproj/project.pbxproj
+!*.xcodeproj/xcshareddata/
+!*.xcworkspace/contents.xcworkspacedata
+**/xcshareddata/WorkspaceSettings.xcsettings

@@ -1,0 +1,20 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Stad.macOS' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Stad.macOS
+  pod 'gRPC-Swift', '~> 1.0.0-alpha.20'
+
+  target 'Stad.macOSTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'Stad.macOSUITests' do
+    # Pods for testing
+  end
+
+end
