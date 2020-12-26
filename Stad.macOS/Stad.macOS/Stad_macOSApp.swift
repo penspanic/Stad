@@ -9,9 +9,17 @@ import SwiftUI
 
 @main
 struct Stad_macOSApp: App {
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
+        var body: some Scene {
+            WindowGroup {
+                computedView().frame(minWidth: 500, minHeight: 400)
+            }
+        }
+    func computedView() -> some View {
+        if StadApplication.getAppSceneType() == AppSceneType.Connect {
+            return AnyView(ConnectServiceView())
+        }
+        else {
+            return AnyView(ContentView())
         }
     }
 }

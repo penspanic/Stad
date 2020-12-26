@@ -7,3 +7,7 @@
 
 import Foundation
 import GRPC
+
+public struct StadServiceImpl {
+    
+}

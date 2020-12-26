@@ -70,13 +70,16 @@ ${XCODEPROJ}:
 		--grpc-swift_out=Stad.macOS/gen/
 
 
-STAD_PROTO=../protos/StadService.proto
-STAD_PB=$(STAD_PROTO:.proto=.pb.swift)
-STAD_GRPC=$(STAD_PROTO:.proto=.grpc.swift)
+STAD_SERVICE_PROTO=../protos/StadService.proto
+STAD_SERVICE_PB=$(STAD_SERVICE_PROTO:.proto=.pb.swift)
+STAD_SERVICE_GRPC=$(STAD_SERVICE_PROTO:.proto=.grpc.swift)
+
+STAD_CONSTANTS_PROTO=../protos/StadConstants.proto
+STAD_CONSTANTS_PB=$(STAD_CONSTANTS_PROTO:.proto=.pb.swift)
 
 # Generates protobufs and gRPC client
 .PHONY:
-generate-stad: ${STAD_PB} ${STAD_GRPC}
+generate-stad: ${STAD_SERVICE_PB} ${STAD_SERVICE_GRPC} ${STAD_CONSTANTS_PB}
 
 
 ### Testing ####################################################################

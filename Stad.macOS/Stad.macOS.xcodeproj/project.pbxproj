@@ -8,13 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		1309428E8AA3016C1597AEC5 /* Pods_Stad_macOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 57D9F9587073E4A9646EF545 /* Pods_Stad_macOS.framework */; };
+		5B12DD192597702500031065 /* StadConstants.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12DD162597702500031065 /* StadConstants.pb.swift */; };
+		5B12DD1A2597702500031065 /* StadService.grpc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12DD172597702500031065 /* StadService.grpc.swift */; };
+		5B12DD1B2597702500031065 /* StadService.pb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B12DD182597702500031065 /* StadService.pb.swift */; };
 		5B42395D25972A6C00D5E1C1 /* Stad_macOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42395C25972A6C00D5E1C1 /* Stad_macOSApp.swift */; };
 		5B42395F25972A6C00D5E1C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42395E25972A6C00D5E1C1 /* ContentView.swift */; };
 		5B42396125972A6D00D5E1C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B42396025972A6D00D5E1C1 /* Assets.xcassets */; };
 		5B42396425972A6D00D5E1C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5B42396325972A6D00D5E1C1 /* Preview Assets.xcassets */; };
 		5B42397025972A6D00D5E1C1 /* Stad_macOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42396F25972A6D00D5E1C1 /* Stad_macOSTests.swift */; };
 		5B42397B25972A6D00D5E1C1 /* Stad_macOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42397A25972A6D00D5E1C1 /* Stad_macOSUITests.swift */; };
-		5B42399025972B6F00D5E1C1 /* StadServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B42398F25972B6F00D5E1C1 /* StadServiceImpl.swift */; };
+		5B4239B525972F0400D5E1C1 /* ConnectServiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4239B425972F0400D5E1C1 /* ConnectServiceView.swift */; };
+		5B4239BD25972F2100D5E1C1 /* StadConnector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4239BC25972F2100D5E1C1 /* StadConnector.swift */; };
+		5B4239F025974F6200D5E1C1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4239EF25974F6200D5E1C1 /* Constants.swift */; };
+		5B4239F525974FBA00D5E1C1 /* StadApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B4239F425974FBA00D5E1C1 /* StadApplication.swift */; };
 		DC93169B29A7F86004877BAE /* Pods_Stad_macOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A037C70ADBA481996569D389 /* Pods_Stad_macOSTests.framework */; };
 		DCEA1B0B3AAD1E76C9389053 /* Pods_Stad_macOS_Stad_macOSUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC30F0E4A20BD69B7C21D70B /* Pods_Stad_macOS_Stad_macOSUITests.framework */; };
 /* End PBXBuildFile section */
@@ -39,6 +45,9 @@
 /* Begin PBXFileReference section */
 		4A4D5593D5963B97BC191D59 /* Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-Stad.macOS-Stad.macOSUITests/Pods-Stad.macOS-Stad.macOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		57D9F9587073E4A9646EF545 /* Pods_Stad_macOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stad_macOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B12DD162597702500031065 /* StadConstants.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StadConstants.pb.swift; sourceTree = "<group>"; };
+		5B12DD172597702500031065 /* StadService.grpc.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StadService.grpc.swift; sourceTree = "<group>"; };
+		5B12DD182597702500031065 /* StadService.pb.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StadService.pb.swift; sourceTree = "<group>"; };
 		5B42395925972A6C00D5E1C1 /* Stad.macOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stad.macOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42395C25972A6C00D5E1C1 /* Stad_macOSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stad_macOSApp.swift; sourceTree = "<group>"; };
 		5B42395E25972A6C00D5E1C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -52,7 +61,10 @@
 		5B42397625972A6D00D5E1C1 /* Stad.macOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Stad.macOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B42397A25972A6D00D5E1C1 /* Stad_macOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stad_macOSUITests.swift; sourceTree = "<group>"; };
 		5B42397C25972A6D00D5E1C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5B42398F25972B6F00D5E1C1 /* StadServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadServiceImpl.swift; sourceTree = "<group>"; };
+		5B4239B425972F0400D5E1C1 /* ConnectServiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectServiceView.swift; sourceTree = "<group>"; };
+		5B4239BC25972F2100D5E1C1 /* StadConnector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadConnector.swift; sourceTree = "<group>"; };
+		5B4239EF25974F6200D5E1C1 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		5B4239F425974FBA00D5E1C1 /* StadApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StadApplication.swift; sourceTree = "<group>"; };
 		6B81AAD3C5802885D65BEEBE /* Pods-Stad.macOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOSTests.release.xcconfig"; path = "Target Support Files/Pods-Stad.macOSTests/Pods-Stad.macOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		A037C70ADBA481996569D389 /* Pods_Stad_macOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Stad_macOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE5A311206E1B874E1ACA7BD /* Pods-Stad.macOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Stad.macOS.release.xcconfig"; path = "Target Support Files/Pods-Stad.macOS/Pods-Stad.macOS.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,9 +115,21 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		5B12DD152597702500031065 /* gen */ = {
+			isa = PBXGroup;
+			children = (
+				5B12DD162597702500031065 /* StadConstants.pb.swift */,
+				5B12DD172597702500031065 /* StadService.grpc.swift */,
+				5B12DD182597702500031065 /* StadService.pb.swift */,
+			);
+			path = gen;
+			sourceTree = "<group>";
+		};
 		5B42395025972A6C00D5E1C1 = {
 			isa = PBXGroup;
 			children = (
+				5B4239F425974FBA00D5E1C1 /* StadApplication.swift */,
+				5B4239EF25974F6200D5E1C1 /* Constants.swift */,
 				5B42395B25972A6C00D5E1C1 /* Stad.macOS */,
 				5B42396E25972A6D00D5E1C1 /* Stad.macOSTests */,
 				5B42397925972A6D00D5E1C1 /* Stad.macOSUITests */,
@@ -128,6 +152,8 @@
 		5B42395B25972A6C00D5E1C1 /* Stad.macOS */ = {
 			isa = PBXGroup;
 			children = (
+				5B12DD152597702500031065 /* gen */,
+				5B4239B325972ED300D5E1C1 /* View */,
 				5B42398E25972B5B00D5E1C1 /* Core */,
 				5B42395C25972A6C00D5E1C1 /* Stad_macOSApp.swift */,
 				5B42395E25972A6C00D5E1C1 /* ContentView.swift */,
@@ -168,9 +194,17 @@
 		5B42398E25972B5B00D5E1C1 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				5B42398F25972B6F00D5E1C1 /* StadServiceImpl.swift */,
+				5B4239BC25972F2100D5E1C1 /* StadConnector.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		5B4239B325972ED300D5E1C1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5B4239B425972F0400D5E1C1 /* ConnectServiceView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		98D56EEBD63EA8BDCD94703E /* Frameworks */ = {
@@ -420,9 +454,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5B42399025972B6F00D5E1C1 /* StadServiceImpl.swift in Sources */,
+				5B4239F525974FBA00D5E1C1 /* StadApplication.swift in Sources */,
+				5B12DD1A2597702500031065 /* StadService.grpc.swift in Sources */,
+				5B12DD1B2597702500031065 /* StadService.pb.swift in Sources */,
+				5B4239BD25972F2100D5E1C1 /* StadConnector.swift in Sources */,
+				5B12DD192597702500031065 /* StadConstants.pb.swift in Sources */,
+				5B4239B525972F0400D5E1C1 /* ConnectServiceView.swift in Sources */,
 				5B42395F25972A6C00D5E1C1 /* ContentView.swift in Sources */,
 				5B42395D25972A6C00D5E1C1 /* Stad_macOSApp.swift in Sources */,
+				5B4239F025974F6200D5E1C1 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
