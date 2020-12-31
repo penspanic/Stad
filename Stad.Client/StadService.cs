@@ -14,8 +14,8 @@ namespace Stad.Client
         public override async Task<TerminateReply> Terminate(TerminateRequest request, ServerCallContext context)
         {
             // TODO: state 세분화
-            StadClient.TerminateToken.Cancel();
-            while (StadClient.IsServerTerminated == false)
+            ClientApplication.TerminateToken.Cancel();
+            while (ClientApplication.IsServerTerminated == false)
             {
                 Thread.Sleep(10);
             }

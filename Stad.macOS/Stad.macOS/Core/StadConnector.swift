@@ -19,6 +19,7 @@ public class StadConnector {
         //
         // See: https://github.com/apple/swift-nio#eventloops-and-eventloopgroups
         let group = MultiThreadedEventLoopGroup(numberOfThreads: 1)
+        print("create group")
         
         // Make sure the group is shutdown when we're done with it.
         defer {
@@ -27,17 +28,21 @@ public class StadConnector {
         
         // Configure the channel, we're not using TLS so the connection is `insecure`.
         let channel = ClientConnection.insecure(group: group)
-            .connect(host: host, port: port)
+            .connect(host: "localhost", port: 46755)
+        print("connect")
         
         // Close the connection when we're done with it.
         defer {
+            print("close")
             try! channel.close().wait()
         }
         do {
             // Provide the connection to the generated client.
+            print("try hello")
             let client = Stad_Client_StadServiceClient(channel: channel)
             let sayHello = client.sayHello(Stad_Client_HelloRequest())
             let helloReply = try sayHello.response.wait()
+            print("Hello reply")
             print (helloReply)
         }
         catch {

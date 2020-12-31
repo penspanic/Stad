@@ -17,7 +17,9 @@ struct ConnectServiceView: View {
         }
     }
     func connect() {
-        StadConnector.connect(host: "localhost", port: Constants.ServicePort)
+        DispatchQueue.global(qos: .background).async {
+            StadConnector.connect(host: "127.0.0.1", port: Constants.ServicePort)
+        }
     }
 }
 

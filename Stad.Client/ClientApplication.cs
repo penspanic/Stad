@@ -5,7 +5,7 @@ using Grpc.Core;
 
 namespace Stad.Client
 {
-    public static class StadClient
+    public static class ClientApplication
     {
         public static CancellationTokenSource TerminateToken { get; private set; }
         public static bool IsServerTerminated => _serverTerminateCompletionSource?.Task.IsCompleted ?? false;
@@ -22,6 +22,14 @@ namespace Stad.Client
 
             TerminateToken = new CancellationTokenSource();
             _serverTerminateCompletionSource = new TaskCompletionSource();
+
+            // server test self
+            using var channel = Grpc.Net.Client.GrpcChannel.ForAddress("http://localhost:46755");
+            var client = new StadService.StadServiceClient(channel);
+            var reply = await client.SayHelloAsync(
+                              new HelloRequest { Name = "GreeterClient" });
+            Console.WriteLine("test success!");
+            //
 
             while (TerminateToken.IsCancellationRequested == false)
             {

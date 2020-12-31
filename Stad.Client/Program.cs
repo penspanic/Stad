@@ -10,10 +10,10 @@ namespace Stad.Client
             Server server = new Server
             {
                 Services = {StadService.BindService(new StadServiceImpl())},
-                Ports = {new ServerPort("localhost", 46755, ServerCredentials.Insecure)}
+                Ports = {new ServerPort("127.0.0.1", 46755, ServerCredentials.Insecure)}
             };
 
-            StadClient.Run(server).Wait();
+            ClientApplication.Run(server).Wait();
         }
     }
 }
