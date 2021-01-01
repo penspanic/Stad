@@ -39,8 +39,8 @@ public class StadConnector {
         do {
             // Provide the connection to the generated client.
             print("try hello")
-            let client = Stad_Client_StadServiceClient(channel: channel)
-            let sayHello = client.sayHello(Stad_Client_HelloRequest())
+            let client = Stad_Service_StadServiceClient(channel: channel)
+            let sayHello = client.sayHello(Stad_Service_HelloRequest())
             let helloReply = try sayHello.response.wait()
             print("Hello reply")
             print (helloReply)

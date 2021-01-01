@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Test", "Stad.Test\Stad
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.View.Wpf", "Stad.View.Wpf\Stad.View.Wpf.csproj", "{F8A8861D-18C1-4FC2-BE38-B72F2A400133}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Client", "Stad.Client\Stad.Client.csproj", "{C579EB15-3F79-4A92-BF4A-EB684E170109}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Stad.Service", "Stad.Service\Stad.Service.csproj", "{C579EB15-3F79-4A92-BF4A-EB684E170109}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

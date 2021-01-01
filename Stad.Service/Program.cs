@@ -1,7 +1,7 @@
 ﻿using System;
 using Grpc.Core;
 
-namespace Stad.Client
+namespace Stad.Service
 {
     class Program
     {

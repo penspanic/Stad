@@ -1,5 +1,5 @@
 syntax = "proto3";
-package stad.client;
+package Stad.Service;
 
 enum SourceType {
   Undefined = 0;

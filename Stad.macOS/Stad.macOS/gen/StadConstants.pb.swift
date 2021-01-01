@@ -20,7 +20,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-public enum Stad_Client_SourceType: SwiftProtobuf.Enum {
+public enum Stad_Service_SourceType: SwiftProtobuf.Enum {
   public typealias RawValue = Int
   case undefined // = 0
   case localFile // = 1
@@ -53,9 +53,9 @@ public enum Stad_Client_SourceType: SwiftProtobuf.Enum {
 
 #if swift(>=4.2)
 
-extension Stad_Client_SourceType: CaseIterable {
+extension Stad_Service_SourceType: CaseIterable {
   // The compiler won't synthesize support with the UNRECOGNIZED case.
-  public static var allCases: [Stad_Client_SourceType] = [
+  public static var allCases: [Stad_Service_SourceType] = [
     .undefined,
     .localFile,
     .amazonS3,
@@ -66,7 +66,7 @@ extension Stad_Client_SourceType: CaseIterable {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-extension Stad_Client_SourceType: SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_SourceType: SwiftProtobuf._ProtoNameProviding {
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     0: .same(proto: "Undefined"),
     1: .same(proto: "LocalFile"),

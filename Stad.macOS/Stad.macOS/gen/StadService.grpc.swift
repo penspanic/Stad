@@ -25,30 +25,30 @@ import NIO
 import SwiftProtobuf
 
 
-/// Usage: instantiate `Stad_Client_StadServiceClient`, then call methods of this protocol to make API calls.
-public protocol Stad_Client_StadServiceClientProtocol: GRPCClient {
+/// Usage: instantiate `Stad_Service_StadServiceClient`, then call methods of this protocol to make API calls.
+public protocol Stad_Service_StadServiceClientProtocol: GRPCClient {
   var serviceName: String { get }
-  var interceptors: Stad_Client_StadServiceClientInterceptorFactoryProtocol? { get }
+  var interceptors: Stad_Service_StadServiceClientInterceptorFactoryProtocol? { get }
 
   func sayHello(
-    _ request: Stad_Client_HelloRequest,
+    _ request: Stad_Service_HelloRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Stad_Client_HelloRequest, Stad_Client_HelloReply>
+  ) -> UnaryCall<Stad_Service_HelloRequest, Stad_Service_HelloReply>
 
   func terminate(
-    _ request: Stad_Client_TerminateRequest,
+    _ request: Stad_Service_TerminateRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Stad_Client_TerminateRequest, Stad_Client_TerminateReply>
+  ) -> UnaryCall<Stad_Service_TerminateRequest, Stad_Service_TerminateReply>
 
   func loadAssemblySource(
-    _ request: Stad_Client_LoadAssemblyRequest,
+    _ request: Stad_Service_LoadAssemblyRequest,
     callOptions: CallOptions?
-  ) -> UnaryCall<Stad_Client_LoadAssemblyRequest, Stad_Client_LoadAssemblyReply>
+  ) -> UnaryCall<Stad_Service_LoadAssemblyRequest, Stad_Service_LoadAssemblyReply>
 }
 
-extension Stad_Client_StadServiceClientProtocol {
+extension Stad_Service_StadServiceClientProtocol {
   public var serviceName: String {
-    return "stad.client.StadService"
+    return "Stad.Service.StadService"
   }
 
   /// Application
@@ -58,11 +58,11 @@ extension Stad_Client_StadServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   public func sayHello(
-    _ request: Stad_Client_HelloRequest,
+    _ request: Stad_Service_HelloRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Stad_Client_HelloRequest, Stad_Client_HelloReply> {
+  ) -> UnaryCall<Stad_Service_HelloRequest, Stad_Service_HelloReply> {
     return self.makeUnaryCall(
-      path: "/stad.client.StadService/SayHello",
+      path: "/Stad.Service.StadService/SayHello",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeSayHelloInterceptors() ?? []
@@ -76,11 +76,11 @@ extension Stad_Client_StadServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   public func terminate(
-    _ request: Stad_Client_TerminateRequest,
+    _ request: Stad_Service_TerminateRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Stad_Client_TerminateRequest, Stad_Client_TerminateReply> {
+  ) -> UnaryCall<Stad_Service_TerminateRequest, Stad_Service_TerminateReply> {
     return self.makeUnaryCall(
-      path: "/stad.client.StadService/Terminate",
+      path: "/Stad.Service.StadService/Terminate",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeTerminateInterceptors() ?? []
@@ -94,11 +94,11 @@ extension Stad_Client_StadServiceClientProtocol {
   ///   - callOptions: Call options.
   /// - Returns: A `UnaryCall` with futures for the metadata, status and response.
   public func loadAssemblySource(
-    _ request: Stad_Client_LoadAssemblyRequest,
+    _ request: Stad_Service_LoadAssemblyRequest,
     callOptions: CallOptions? = nil
-  ) -> UnaryCall<Stad_Client_LoadAssemblyRequest, Stad_Client_LoadAssemblyReply> {
+  ) -> UnaryCall<Stad_Service_LoadAssemblyRequest, Stad_Service_LoadAssemblyReply> {
     return self.makeUnaryCall(
-      path: "/stad.client.StadService/LoadAssemblySource",
+      path: "/Stad.Service.StadService/LoadAssemblySource",
       request: request,
       callOptions: callOptions ?? self.defaultCallOptions,
       interceptors: self.interceptors?.makeLoadAssemblySourceInterceptors() ?? []
@@ -106,24 +106,24 @@ extension Stad_Client_StadServiceClientProtocol {
   }
 }
 
-public protocol Stad_Client_StadServiceClientInterceptorFactoryProtocol {
+public protocol Stad_Service_StadServiceClientInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when invoking 'sayHello'.
-  func makeSayHelloInterceptors() -> [ClientInterceptor<Stad_Client_HelloRequest, Stad_Client_HelloReply>]
+  func makeSayHelloInterceptors() -> [ClientInterceptor<Stad_Service_HelloRequest, Stad_Service_HelloReply>]
 
   /// - Returns: Interceptors to use when invoking 'terminate'.
-  func makeTerminateInterceptors() -> [ClientInterceptor<Stad_Client_TerminateRequest, Stad_Client_TerminateReply>]
+  func makeTerminateInterceptors() -> [ClientInterceptor<Stad_Service_TerminateRequest, Stad_Service_TerminateReply>]
 
   /// - Returns: Interceptors to use when invoking 'loadAssemblySource'.
-  func makeLoadAssemblySourceInterceptors() -> [ClientInterceptor<Stad_Client_LoadAssemblyRequest, Stad_Client_LoadAssemblyReply>]
+  func makeLoadAssemblySourceInterceptors() -> [ClientInterceptor<Stad_Service_LoadAssemblyRequest, Stad_Service_LoadAssemblyReply>]
 }
 
-public final class Stad_Client_StadServiceClient: Stad_Client_StadServiceClientProtocol {
+public final class Stad_Service_StadServiceClient: Stad_Service_StadServiceClientProtocol {
   public let channel: GRPCChannel
   public var defaultCallOptions: CallOptions
-  public var interceptors: Stad_Client_StadServiceClientInterceptorFactoryProtocol?
+  public var interceptors: Stad_Service_StadServiceClientInterceptorFactoryProtocol?
 
-  /// Creates a client for the stad.client.StadService service.
+  /// Creates a client for the Stad.Service.StadService service.
   ///
   /// - Parameters:
   ///   - channel: `GRPCChannel` to the service host.
@@ -132,7 +132,7 @@ public final class Stad_Client_StadServiceClient: Stad_Client_StadServiceClientP
   public init(
     channel: GRPCChannel,
     defaultCallOptions: CallOptions = CallOptions(),
-    interceptors: Stad_Client_StadServiceClientInterceptorFactoryProtocol? = nil
+    interceptors: Stad_Service_StadServiceClientInterceptorFactoryProtocol? = nil
   ) {
     self.channel = channel
     self.defaultCallOptions = defaultCallOptions
@@ -141,19 +141,19 @@ public final class Stad_Client_StadServiceClient: Stad_Client_StadServiceClientP
 }
 
 /// To build a server, implement a class that conforms to this protocol.
-public protocol Stad_Client_StadServiceProvider: CallHandlerProvider {
-  var interceptors: Stad_Client_StadServiceServerInterceptorFactoryProtocol? { get }
+public protocol Stad_Service_StadServiceProvider: CallHandlerProvider {
+  var interceptors: Stad_Service_StadServiceServerInterceptorFactoryProtocol? { get }
 
   /// Application
-  func sayHello(request: Stad_Client_HelloRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stad_Client_HelloReply>
+  func sayHello(request: Stad_Service_HelloRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stad_Service_HelloReply>
 
-  func terminate(request: Stad_Client_TerminateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stad_Client_TerminateReply>
+  func terminate(request: Stad_Service_TerminateRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stad_Service_TerminateReply>
 
-  func loadAssemblySource(request: Stad_Client_LoadAssemblyRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stad_Client_LoadAssemblyReply>
+  func loadAssemblySource(request: Stad_Service_LoadAssemblyRequest, context: StatusOnlyCallContext) -> EventLoopFuture<Stad_Service_LoadAssemblyReply>
 }
 
-extension Stad_Client_StadServiceProvider {
-  public var serviceName: Substring { return "stad.client.StadService" }
+extension Stad_Service_StadServiceProvider {
+  public var serviceName: Substring { return "Stad.Service.StadService" }
 
   /// Determines, calls and returns the appropriate request handler, depending on the request's method.
   /// Returns nil for methods not handled by this service.
@@ -198,17 +198,17 @@ extension Stad_Client_StadServiceProvider {
   }
 }
 
-public protocol Stad_Client_StadServiceServerInterceptorFactoryProtocol {
+public protocol Stad_Service_StadServiceServerInterceptorFactoryProtocol {
 
   /// - Returns: Interceptors to use when handling 'sayHello'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeSayHelloInterceptors() -> [ServerInterceptor<Stad_Client_HelloRequest, Stad_Client_HelloReply>]
+  func makeSayHelloInterceptors() -> [ServerInterceptor<Stad_Service_HelloRequest, Stad_Service_HelloReply>]
 
   /// - Returns: Interceptors to use when handling 'terminate'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeTerminateInterceptors() -> [ServerInterceptor<Stad_Client_TerminateRequest, Stad_Client_TerminateReply>]
+  func makeTerminateInterceptors() -> [ServerInterceptor<Stad_Service_TerminateRequest, Stad_Service_TerminateReply>]
 
   /// - Returns: Interceptors to use when handling 'loadAssemblySource'.
   ///   Defaults to calling `self.makeInterceptors()`.
-  func makeLoadAssemblySourceInterceptors() -> [ServerInterceptor<Stad_Client_LoadAssemblyRequest, Stad_Client_LoadAssemblyReply>]
+  func makeLoadAssemblySourceInterceptors() -> [ServerInterceptor<Stad_Service_LoadAssemblyRequest, Stad_Service_LoadAssemblyReply>]
 }

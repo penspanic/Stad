@@ -1,7 +1,7 @@
 using System;
 using Stad.Core.Source;
 
-namespace Stad.Client
+namespace Stad.Service
 {
     public static class ExceptionHelper
     {

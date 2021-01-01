@@ -20,7 +20,7 @@ fileprivate struct _GeneratedWithProtocGenSwiftVersion: SwiftProtobuf.ProtobufAP
   typealias Version = _2
 }
 
-public struct Stad_Client_HelloRequest {
+public struct Stad_Service_HelloRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -32,7 +32,7 @@ public struct Stad_Client_HelloRequest {
   public init() {}
 }
 
-public struct Stad_Client_HelloReply {
+public struct Stad_Service_HelloReply {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -44,7 +44,7 @@ public struct Stad_Client_HelloReply {
   public init() {}
 }
 
-public struct Stad_Client_TerminateRequest {
+public struct Stad_Service_TerminateRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -54,7 +54,7 @@ public struct Stad_Client_TerminateRequest {
   public init() {}
 }
 
-public struct Stad_Client_TerminateReply {
+public struct Stad_Service_TerminateReply {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -64,19 +64,19 @@ public struct Stad_Client_TerminateReply {
   public init() {}
 }
 
-public struct Stad_Client_LoadAssemblyRequest {
+public struct Stad_Service_LoadAssemblyRequest {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
 
-  public var type: Stad_Client_SourceType = .undefined
+  public var type: Stad_Service_SourceType = .undefined
 
   public var unknownFields = SwiftProtobuf.UnknownStorage()
 
   public init() {}
 }
 
-public struct Stad_Client_LoadAssemblyReply {
+public struct Stad_Service_LoadAssemblyReply {
   // SwiftProtobuf.Message conformance is added in an extension below. See the
   // `Message` and `Message+*Additions` files in the SwiftProtobuf library for
   // methods supported on all messages.
@@ -88,9 +88,9 @@ public struct Stad_Client_LoadAssemblyReply {
 
 // MARK: - Code below here is support for the SwiftProtobuf runtime.
 
-fileprivate let _protobuf_package = "stad.client"
+fileprivate let _protobuf_package = "Stad.Service"
 
-extension Stad_Client_HelloRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_HelloRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HelloRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "name"),
@@ -115,14 +115,14 @@ extension Stad_Client_HelloRequest: SwiftProtobuf.Message, SwiftProtobuf._Messag
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Stad_Client_HelloRequest, rhs: Stad_Client_HelloRequest) -> Bool {
+  public static func ==(lhs: Stad_Service_HelloRequest, rhs: Stad_Service_HelloRequest) -> Bool {
     if lhs.name != rhs.name {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Stad_Client_HelloReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_HelloReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".HelloReply"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "message"),
@@ -147,14 +147,14 @@ extension Stad_Client_HelloReply: SwiftProtobuf.Message, SwiftProtobuf._MessageI
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Stad_Client_HelloReply, rhs: Stad_Client_HelloReply) -> Bool {
+  public static func ==(lhs: Stad_Service_HelloReply, rhs: Stad_Service_HelloReply) -> Bool {
     if lhs.message != rhs.message {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Stad_Client_TerminateRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_TerminateRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TerminateRequest"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -167,13 +167,13 @@ extension Stad_Client_TerminateRequest: SwiftProtobuf.Message, SwiftProtobuf._Me
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Stad_Client_TerminateRequest, rhs: Stad_Client_TerminateRequest) -> Bool {
+  public static func ==(lhs: Stad_Service_TerminateRequest, rhs: Stad_Service_TerminateRequest) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Stad_Client_TerminateReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_TerminateReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".TerminateReply"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -186,13 +186,13 @@ extension Stad_Client_TerminateReply: SwiftProtobuf.Message, SwiftProtobuf._Mess
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Stad_Client_TerminateReply, rhs: Stad_Client_TerminateReply) -> Bool {
+  public static func ==(lhs: Stad_Service_TerminateReply, rhs: Stad_Service_TerminateReply) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Stad_Client_LoadAssemblyRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_LoadAssemblyRequest: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LoadAssemblyRequest"
   public static let _protobuf_nameMap: SwiftProtobuf._NameMap = [
     1: .same(proto: "Type"),
@@ -217,14 +217,14 @@ extension Stad_Client_LoadAssemblyRequest: SwiftProtobuf.Message, SwiftProtobuf.
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Stad_Client_LoadAssemblyRequest, rhs: Stad_Client_LoadAssemblyRequest) -> Bool {
+  public static func ==(lhs: Stad_Service_LoadAssemblyRequest, rhs: Stad_Service_LoadAssemblyRequest) -> Bool {
     if lhs.type != rhs.type {return false}
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }
 }
 
-extension Stad_Client_LoadAssemblyReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
+extension Stad_Service_LoadAssemblyReply: SwiftProtobuf.Message, SwiftProtobuf._MessageImplementationBase, SwiftProtobuf._ProtoNameProviding {
   public static let protoMessageName: String = _protobuf_package + ".LoadAssemblyReply"
   public static let _protobuf_nameMap = SwiftProtobuf._NameMap()
 
@@ -237,7 +237,7 @@ extension Stad_Client_LoadAssemblyReply: SwiftProtobuf.Message, SwiftProtobuf._M
     try unknownFields.traverse(visitor: &visitor)
   }
 
-  public static func ==(lhs: Stad_Client_LoadAssemblyReply, rhs: Stad_Client_LoadAssemblyReply) -> Bool {
+  public static func ==(lhs: Stad_Service_LoadAssemblyReply, rhs: Stad_Service_LoadAssemblyReply) -> Bool {
     if lhs.unknownFields != rhs.unknownFields {return false}
     return true
   }

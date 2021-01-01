@@ -3,7 +3,7 @@ using Stad.Core;
 using Stad.Core.Source.Assembly;
 using Stad.Core.Source.Data;
 
-namespace Stad.Client
+namespace Stad.Service
 {
     public enum StadEventType
     {

@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Grpc.Core;
 
-namespace Stad.Client
+namespace Stad.Service
 {
     public class StadServiceImpl : StadService.StadServiceBase
     {
