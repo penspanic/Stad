@@ -1,4 +1,5 @@
-﻿using System.Collections.Immutable;
+﻿using System.Linq;
+using System.Collections.Immutable;
 using System.Collections.ObjectModel;
 
 namespace Stad.Core.Model
@@ -15,6 +16,17 @@ namespace Stad.Core.Model
             Name = name;
             ListModels = listModels;
             SingleModels = singleModels;
+        }
+
+        public static DataSetModel CreateFrom(Stad.Model.DataSetProto proto)
+        {
+            return new DataSetModel(
+                proto.Name,
+                new ReadOnlyCollection<StadModel>(
+                    proto.ListModels.Select(m => StadModel.CreateFrom(m)).ToList()),
+                new ReadOnlyCollection<StadModel>(
+                    proto.SingleModels.Select(m => StadModel.CreateFrom(m)).ToList())
+            );
         }
 
         public string Name { get; }

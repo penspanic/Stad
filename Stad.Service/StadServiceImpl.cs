@@ -14,8 +14,8 @@ namespace Stad.Service
         public override async Task<TerminateReply> Terminate(TerminateRequest request, ServerCallContext context)
         {
             // TODO: state 세분화
-            ClientApplication.TerminateToken.Cancel();
-            while (ClientApplication.IsServerTerminated == false)
+            ServerApplication.TerminateToken.Cancel();
+            while (ServerApplication.IsServerTerminated == false)
             {
                 Thread.Sleep(10);
             }
@@ -26,6 +26,11 @@ namespace Stad.Service
         public override Task<LoadAssemblyReply> LoadAssemblySource(LoadAssemblyRequest request, ServerCallContext context)
         {
             return base.LoadAssemblySource(request, context);
+        }
+
+        public override Task<LoadDataReply> LoadDataSource(LoadDataRequest request, ServerCallContext context)
+        {
+            return base.LoadDataSource(request, context);
         }
     }
 }

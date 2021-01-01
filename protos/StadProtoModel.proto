@@ -1,0 +1,42 @@
+syntax = "proto3";
+package Stad.Model;
+
+message RegistryProto {
+    repeated DataSetProto DataSets = 1;
+}
+
+
+message DataSetProto {
+    string Name = 1;
+    repeated StadModelProto ListModels = 2;
+    repeated StadModelProto SingleModels = 3;
+}
+
+message StadModelProto {
+    string Type = 1;
+    int32 TypeCode = 2;
+    AnnotationInfoProto Annotationinfo = 3;
+    repeated MemberDefinitionProto Members = 4;
+}
+
+message AnnotationInfoProto {
+    repeated StadAnnotationProto Annotations = 1;
+}
+
+message StadAnnotationProto {
+    string Json = 1;
+}
+
+message MemberDefinitionProto {
+    string Type = 1;
+    string Name = 2;
+    MemberKind Kind = 3;
+    AnnotationInfoProto AnnotationInfo = 4;
+}
+
+/////////////////////// 변환 없이 사용되는 것들 ///////////////////////
+enum MemberKind {
+    MemberKind_Undefined = 0;
+    MemberKind_Field = 1;
+    MemberKind_Property = 2;
+}

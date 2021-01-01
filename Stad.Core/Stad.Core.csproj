@@ -11,4 +11,7 @@
       <ProjectReference Include="..\Stad\Stad.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Google.Protobuf" Version="3.14.0" />
+    </ItemGroup>
 </Project>

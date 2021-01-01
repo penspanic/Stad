@@ -6,3 +6,8 @@ enum SourceType {
   LocalFile = 1;
   AmazonS3 = 2;
 }
+
+enum ReplyResultType {
+    Reply_Success = 0;
+    Reply_Fail = 1;
+}

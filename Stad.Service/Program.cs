@@ -13,7 +13,7 @@ namespace Stad.Service
                 Ports = {new ServerPort("127.0.0.1", 46755, ServerCredentials.Insecure)}
             };
 
-            ClientApplication.Run(server).Wait();
+            ServerApplication.Run(server).Wait();
         }
     }
 }

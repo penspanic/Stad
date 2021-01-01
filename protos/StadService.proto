@@ -9,6 +9,7 @@ service StadService {
   rpc Terminate (TerminateRequest) returns (TerminateReply) {}
   
   rpc LoadAssemblySource(LoadAssemblyRequest) returns (LoadAssemblyReply) {}
+  rpc LoadDataSource(LoadDataRequest) returns (LoadDataReply) {}
 }
 
 message HelloRequest {
@@ -17,11 +18,20 @@ message HelloRequest {
 message HelloReply {
   string message = 1;
 }
-
+//
 message TerminateRequest { }
 message TerminateReply {}
-
+//
 message LoadAssemblyRequest {
   SourceType Type = 1;
 }
 message LoadAssemblyReply {}
+//
+message LoadDataRequest {
+    SourceType Type = 1;
+    string Param = 2;
+}
+message LoadDataReply {
+    ReplyResultType ResultType = 1;
+}
+//

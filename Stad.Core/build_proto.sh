@@ -1,0 +1,1 @@
+protoc -I=../protos --csharp_out=. StadProtoModel.proto

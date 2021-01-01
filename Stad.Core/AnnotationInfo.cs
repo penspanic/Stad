@@ -9,6 +9,13 @@ namespace Stad.Core
             Annotations = annotations;
         }
 
+        public static AnnotationInfo CreateFrom(Stad.Model.AnnotationInfoProto proto)
+        {
+            var result = new AnnotationInfo();
+            // TODO: implement
+            return result;
+        }
+
         public readonly StadAnnotation[] Annotations;
 
         public T Get<T>() where T : StadAnnotation

@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Collections.ObjectModel;
@@ -29,6 +30,14 @@ namespace Stad.Core
         {
             StadRegistry stadRegistry = new StadRegistry(dataSets);
             return stadRegistry;
+        }
+
+        public static StadRegistry CreateFrom(Stad.Model.RegistryProto proto)
+        {
+            return new StadRegistry(
+                new ReadOnlyCollection<DataSetModel>(
+                    proto.DataSets.Select(m => DataSetModel.CreateFrom(m)).ToList())
+            );
         }
 
         private StadRegistry(ReadOnlyCollection<DataSetModel> dataSets)

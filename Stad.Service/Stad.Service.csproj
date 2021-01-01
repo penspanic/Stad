@@ -4,20 +4,19 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Stad.Core\Stad.Core.csproj"/>
-    <ProjectReference Include="..\Stad\Stad.csproj"/>
+    <ProjectReference Include="..\Stad.Core\Stad.Core.csproj" />
+    <ProjectReference Include="..\Stad\Stad.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Google.Protobuf" Version="3.14.0"/>
-    <PackageReference Include="Grpc" Version="2.34.0"/>
+    <PackageReference Include="Grpc" Version="2.34.0" />
     <PackageReference Include="Grpc.Tools" Version="2.34.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Grpc.Net.Client" Version="2.34.0"/>
+    <PackageReference Include="Grpc.Net.Client" Version="2.34.0" />
   </ItemGroup>
   <ItemGroup>
-    <Protobuf Include="..\protos\StadService.proto" GrpcServices="All"/>
-    <Protobuf Include="..\protos\StadConstants.proto"/>
+    <Protobuf Include="..\protos\StadService.proto" GrpcServices="All" />
+    <Protobuf Include="..\protos\StadConstants.proto" />
   </ItemGroup>
 </Project>

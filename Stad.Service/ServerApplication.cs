@@ -5,7 +5,7 @@ using Grpc.Core;
 
 namespace Stad.Service
 {
-    public static class ClientApplication
+    public static class ServerApplication
     {
         public static CancellationTokenSource TerminateToken { get; private set; }
         public static bool IsServerTerminated => _serverTerminateCompletionSource?.Task.IsCompleted ?? false;
