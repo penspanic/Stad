@@ -1,7 +1,7 @@
 ﻿using Stad.Analysis;
 using Stad.Core;
 using Stad.Core.Source.Assembly;
-using Stad.Core.Source.Data;
+using Stad.Service;
 using Stad.View.Wpf.Types;
 using System;
 using System.Windows;
@@ -50,7 +50,7 @@ namespace Stad.View.Wpf.UI.Components
                         return;
                     }
 
-                    StadApplication.SetStadRegitry(stadRegistry);
+                    StadApplication.SetStadRegistry(stadRegistry);
                 }
                 catch (Exception exception)
                 {

@@ -1,4 +1,5 @@
 ﻿using Stad.Core.Source.Data;
+using Stad.Service;
 using Stad.View.Wpf.Types;
 using System;
 using System.Windows;
