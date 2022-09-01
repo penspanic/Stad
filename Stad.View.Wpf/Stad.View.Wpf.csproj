@@ -2,7 +2,7 @@
 
     <PropertyGroup>
         <OutputType>WinExe</OutputType>
-        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <TargetFramework>net6.0-windows</TargetFramework>
         <UseWPF>true</UseWPF>
         <UseWindowsForms>true</UseWindowsForms>
     </PropertyGroup>
@@ -11,6 +11,7 @@
       <ProjectReference Include="..\Stad.Analysis\Stad.Analysis.csproj" />
       <ProjectReference Include="..\Stad.Core\Stad.Core.csproj" />
       <ProjectReference Include="..\Stad.Diff\Stad.Diff.csproj" />
+      <ProjectReference Include="..\Stad.Service\Stad.Service.csproj" />
     </ItemGroup>
 
     <ItemGroup>
